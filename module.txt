@@ -1,0 +1,15 @@
+{
+    "id" : "AdditionalRails",
+    "version" : "0.0.1-SNAPSHOT",
+    "author" : "",
+    "displayName" : "Additional Rails",
+    "description" : "Adds additional rails to Terasology",
+    "dependencies" : [
+        {
+            "id": "Rails",
+            "minVersion": "0.3.5"
+        }
+    ],
+    "serverSideOnly" : false,
+    "isGameplay" : "true"
+}
