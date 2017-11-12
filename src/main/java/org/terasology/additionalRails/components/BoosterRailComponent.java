@@ -15,5 +15,7 @@
  */
 package org.terasology.additionalRails.components;
 
-public class BoosterRail {
+import org.terasology.entitySystem.Component;
+
+public class BoosterRailComponent  implements Component {
 }

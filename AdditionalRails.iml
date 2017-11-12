@@ -14,6 +14,9 @@
     <output-test url="file://$MODULE_DIR$/build/testClasses"/>
     <orderEntry type="module" module-name="engine"/>
     <orderEntry type="module" module-name="engine-tests"/>
+    <orderEntry type="module" module-name="Rails"/>
+    <orderEntry type="module" module-name="Core"/>
+    <orderEntry type="module" module-name="SegmentedPaths"/>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
