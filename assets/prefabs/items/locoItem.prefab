@@ -1,0 +1,14 @@
+{
+    "parent": "engine:iconItem",
+    "DisplayName": {
+        "name": "Locomotive"
+    },
+    "Item": {
+        "name": "Minecart",
+        "icon": "Rails:minecart#loco",
+        "usage": "IN_DIRECTION"
+    },
+     "Rails:CartDefinition": {
+         "prefab" : "AdditionalRails:loco"
+     }
+}
