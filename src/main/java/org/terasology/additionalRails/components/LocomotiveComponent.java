@@ -20,3 +20,5 @@ import org.terasology.entitySystem.Component;
 public class LocomotiveComponent implements Component {
     public boolean active = false;
 }
+
+//test
