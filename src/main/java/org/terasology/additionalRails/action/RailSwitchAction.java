@@ -1,9 +1,12 @@
 package org.terasology.additionalRails.action;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.terasology.additionalRails.components.RailSwitchComponent;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.entity.lifecycleEvents.OnChangedComponent;
 import org.terasology.entitySystem.event.ReceiveEvent;
+import org.terasology.entitySystem.prefab.internal.PrefabFormat;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
@@ -20,6 +23,8 @@ import org.terasology.world.block.BlockManager;
 
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class RailSwitchAction extends BaseComponentSystem {
+
+    private static final Logger logger = LoggerFactory.getLogger(RailSwitchAction.class);
 
     @In
     private WorldProvider worldProvider;
@@ -44,19 +49,26 @@ public class RailSwitchAction extends BaseComponentSystem {
             Block block = worldProvider.getBlock(blockLocation);
 
             SignalConsumerComponent signalConsumerComponent = entity.getComponent(SignalConsumerComponent.class);
+            RailSwitchComponent railSwitchComponent = entity.getComponent(RailSwitchComponent.class);
 
             if (block == railSwitchSignalOff && consumerStatusComponent.hasSignal) {
                 railSwitchSignalOn.setKeepActive(true);
                 worldProvider.setBlock(blockLocation, railSwitchSignalOn);
+                blockEntityRegistry.getBlockEntityAt(blockLocation).addOrSaveComponent(signalConsumerComponent);
+                if (!blockEntityRegistry.getBlockEntityAt(blockLocation).hasComponent(RailSwitchComponent.class)) {
+                    blockEntityRegistry.getBlockEntityAt(blockLocation).addOrSaveComponent(railSwitchComponent);
+                }
             } else if (block == railSwitchSignalOn && !consumerStatusComponent.hasSignal) {
                 railSwitchSignalOff.setKeepActive(true);
-                worldProvider.setBlock(blockLocation, railSwitchSignalOn);
+                worldProvider.setBlock(blockLocation, railSwitchSignalOff);
+                blockEntityRegistry.getBlockEntityAt(blockLocation).addOrSaveComponent(signalConsumerComponent);
+                if (!blockEntityRegistry.getBlockEntityAt(blockLocation).hasComponent(RailSwitchComponent.class)) {
+                    blockEntityRegistry.getBlockEntityAt(blockLocation).addOrSaveComponent(railSwitchComponent);
+                }
             }
 
-            RailSwitchComponent railSwitchComponent = entity.getComponent(RailSwitchComponent.class);
-            blockEntityRegistry.getBlockEntityAt(blockLocation).addOrSaveComponent(signalConsumerComponent);
-            blockEntityRegistry.getBlockEntityAt(blockLocation).addOrSaveComponent(railSwitchComponent);
             worldProvider.getBlock(blockLocation).setKeepActive(true);
         }
     }
 }
+
