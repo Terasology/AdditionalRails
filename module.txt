@@ -12,6 +12,10 @@
         {
             "id": "Core",
             "minVersion": "1.0.0"
+        },
+        {
+            "id": "Signalling",
+            "minVersion": "0.1.1"
         }
     ]
 }
