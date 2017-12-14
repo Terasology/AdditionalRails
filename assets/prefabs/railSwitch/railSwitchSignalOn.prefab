@@ -1,0 +1,13 @@
+{
+    "Signalling:SignalConsumer": {
+        "connectionSides": 63
+    },
+    "Signalling:SignalConsumerStatus": {
+        "hasSignal": true
+    },
+    "AdditionalRails:RailSwitch": {
+        "isOn": true,
+        "hasSignal": true,
+        "mode": 1
+    }
+}
