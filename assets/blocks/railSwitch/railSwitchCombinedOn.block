@@ -1,0 +1,8 @@
+{
+    "entity": {
+        "prefab": "AdditionalRails:railSwitchCombinedOn"
+    },
+    "inventory": {
+        "pickupFamily": "AdditionalRails:railSwitchCombinedOff"
+    }
+}

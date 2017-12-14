@@ -8,6 +8,6 @@
     "AdditionalRails:RailSwitch": {
         "isOn": false,
         "hasSignal": false,
-        "mode": 1
+        "mode": 2
     }
 }
