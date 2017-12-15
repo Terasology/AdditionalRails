@@ -12,7 +12,6 @@ import org.terasology.logic.common.ActivateEvent;
 import org.terasology.math.SideBitFlag;
 import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.minecarts.blocks.RailsUpdateFamily;
-import org.terasology.registry.CoreRegistry;
 import org.terasology.registry.In;
 import org.terasology.signalling.components.SignalConsumerStatusComponent;
 import org.terasology.world.BlockEntityRegistry;
@@ -34,6 +33,8 @@ public class RailSwitchAction extends BaseComponentSystem {
     private WorldProvider worldProvider;
     @In
     private BlockEntityRegistry blockEntityRegistry;
+    @In
+    private BlockManager blockManager;
 
     private Block railSwitchLeverOff;
     private Block railSwitchLeverOn;
@@ -48,7 +49,6 @@ public class RailSwitchAction extends BaseComponentSystem {
      */
     @Override
     public void initialise() {
-        final BlockManager blockManager = CoreRegistry.get(BlockManager.class);
         railSwitchLeverOff = blockManager.getBlock("AdditionalRails:railSwitchLeverOff");
         railSwitchLeverOn = blockManager.getBlock("AdditionalRails:railSwitchLeverOn");
         railSwitchSignalOff = blockManager.getBlock("AdditionalRails:railSwitchSignalOff");
@@ -63,9 +63,8 @@ public class RailSwitchAction extends BaseComponentSystem {
      * @param entity The entity related to railSwitchLever
      */
     @ReceiveEvent(components = {BlockComponent.class, RailSwitchLeverComponent.class})
-    public void railSwitchLeverAction(ActivateEvent event, EntityRef entity) {
-        RailSwitchLeverComponent rslComponent = entity.getComponent(RailSwitchLeverComponent.class);
-        Vector3i blockLocation = new Vector3i(entity.getComponent(BlockComponent.class).getPosition());
+    public void railSwitchLeverAction(ActivateEvent event, EntityRef entity, BlockComponent blockComponent, RailSwitchLeverComponent rslComponent) {
+        Vector3i blockLocation = new Vector3i(blockComponent.getPosition());
 
         //switch the block from on to off, from off to on; rslComponent.isOn is set in block prefab
         if (rslComponent.isOn) {
@@ -84,9 +83,8 @@ public class RailSwitchAction extends BaseComponentSystem {
      * @param entity The entity related to railSwitchSignal
      */
     @ReceiveEvent(components = {BlockComponent.class, RailSwitchSignalComponent.class, SignalConsumerStatusComponent.class})
-    public void railSwitchSignalAction(OnChangedComponent event, EntityRef entity) {
-        SignalConsumerStatusComponent scsComponent = entity.getComponent(SignalConsumerStatusComponent.class);
-        Vector3i blockLocation = new Vector3i(entity.getComponent(BlockComponent.class).getPosition());
+    public void railSwitchSignalAction(OnChangedComponent event, EntityRef entity, BlockComponent blockComponent, SignalConsumerStatusComponent scsComponent) {
+        Vector3i blockLocation = new Vector3i(blockComponent.getPosition());
         Block block = worldProvider.getBlock(blockLocation);
 
         //switch the block from on to off, from off to on based on signal
@@ -108,10 +106,10 @@ public class RailSwitchAction extends BaseComponentSystem {
     private void updateRails(Vector3i switchLocation, boolean inverted) {
         //prepare the locations around the switch, where we're going to look for rails
         Vector3i[] railLocations = {new Vector3i(switchLocation.x, switchLocation.y, switchLocation.z+1), //north
-                                    new Vector3i(switchLocation.x, switchLocation.y, switchLocation.z-1), //south
-                                    new Vector3i(switchLocation.x+1, switchLocation.y, switchLocation.z), //west
-                                    new Vector3i(switchLocation.x-1, switchLocation.y, switchLocation.z), //east
-                                    new Vector3i(switchLocation.x, switchLocation.y+1, switchLocation.z)}; //above
+                new Vector3i(switchLocation.x, switchLocation.y, switchLocation.z-1), //south
+                new Vector3i(switchLocation.x+1, switchLocation.y, switchLocation.z), //west
+                new Vector3i(switchLocation.x-1, switchLocation.y, switchLocation.z), //east
+                new Vector3i(switchLocation.x, switchLocation.y+1, switchLocation.z)}; //above
 
         //iterate through all the positions and change the rail's state if needed
         for (Vector3i railLocation : railLocations) {
