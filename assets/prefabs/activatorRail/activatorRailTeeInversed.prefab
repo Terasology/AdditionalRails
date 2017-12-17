@@ -1,0 +1,12 @@
+{
+     "Rails:Rail": {},
+     "SegmentedPaths:PathDescriptor":{
+       "descriptors" : [ "SegmentedPaths:leftFrontPath","SegmentedPaths:leftRightPath"]
+     },
+     "BlockDropGrammar": {
+         "blockDrops": [
+             "Rails:rails"
+         ]
+     },
+     "AdditionalRails:ActivatorRail": {}
+}
