@@ -1,6 +1,5 @@
 package org.terasology.additionalRails.action;
 
-import org.terasology.additionalRails.components.ExampleActivableCartComponent;
 import org.terasology.additionalRails.components.ActivatorRailComponent;
 import org.terasology.additionalRails.events.CartActivatedEvent;
 import org.terasology.additionalRails.events.CartDeactivatedEvent;
