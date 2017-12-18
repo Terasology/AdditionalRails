@@ -1,0 +1,14 @@
+{
+    "parent": "engine:iconItem",
+    "DisplayName": {
+        "name": "Example Activable Cart"
+    },
+    "Item": {
+        "name": "Example Activable Cart",
+        "icon": "Rails:minecart#minecart",
+        "usage": "IN_DIRECTION"
+    },
+    "Rails:CartDefinition": {
+        "prefab" : "AdditionalRails:exampleActivableCart"
+    }
+}

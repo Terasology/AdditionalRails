@@ -18,7 +18,6 @@ package org.terasology.additionalRails.action;
 import com.google.common.collect.Sets;
 import org.terasology.additionalRails.components.BoosterRailComponent;
 import org.terasology.entitySystem.entity.EntityRef;
-import org.terasology.entitySystem.event.EventPriority;
 import org.terasology.entitySystem.event.ReceiveEvent;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;

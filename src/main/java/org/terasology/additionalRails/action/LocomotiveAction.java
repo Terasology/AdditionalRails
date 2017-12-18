@@ -27,7 +27,6 @@ import org.terasology.logic.common.ActivateEvent;
 import org.terasology.math.geom.Vector3f;
 import org.terasology.minecarts.components.RailVehicleComponent;
 import org.terasology.minecarts.controllers.CartMotionSystem;
-import org.terasology.physics.components.RigidBodyComponent;
 import org.terasology.registry.In;
 import org.terasology.segmentedpaths.components.SegmentEntityComponent;
 

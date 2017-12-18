@@ -1,0 +1,77 @@
+{
+    "shadowCasting": "false",
+    "translucent" : true,
+    "rotation": "Rails:rails",
+    "penetrable" : false,
+
+    "no_connections": {
+        "tile" : "Rails:TrainTrack",
+        "shape": "engine:horizontalOffsetPlane",
+        "tiles" : {
+           "center" : "AdditionalRails:ActivatorTrainTrack"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:activatorRail"
+        }
+    },
+    "one_connection": {
+         "tile" : "Rails:TrainTrack",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:ActivatorTrainTrack"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:activatorRail"
+        }
+    },
+    "one_connection_slope": {
+        "tile" : "Rails:TrainTrack",
+        "shape" : "railSlope",
+        "tiles" : {
+          "center" : "AdditionalRails:ActivatorTrainTrackSlope"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:activatorRailSlope"
+        }
+    },
+    "line_connection": {
+        "tile" : "Rails:TrainTrack",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:ActivatorTrainTrack"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:activatorRail"
+        }
+    },
+    "2d_corner": {
+        "tile" : "Rails:TrainTrack",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:ActivatorTrainTrackCurve"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:activatorRailCurve"
+        }
+    },
+    "2d_t": {
+        "tile" : "Rails:TrainTrackTee",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:ActivatorTrainTrackTee"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:activatorRailTee"
+        }
+    },
+    "cross": {
+        "tile" : "Rails:TrainTrack",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:ActivatorTrainTrackIntersection"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:activatorRailIntersection"
+        }
+    }
+}
