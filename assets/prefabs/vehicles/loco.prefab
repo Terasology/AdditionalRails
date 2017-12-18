@@ -25,10 +25,9 @@
         "regenRate": 1,
         "waitBeforeRegen": 2,
         "destroyEntityOnNoHealth" : true
-
     },
-     "Trigger": {
-        "detectGroups": [
+    "Trigger": {
+        detectGroups": [
             "engine:world",
             "engine:debris",
             "engine:sensor",

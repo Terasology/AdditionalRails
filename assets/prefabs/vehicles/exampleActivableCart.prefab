@@ -16,20 +16,17 @@
             "engine:default"
         ]
     },
-
     "HullShape": {
-         "sourceMesh" : "Rails:minecart_bounds"
+        "sourceMesh" : "Rails:minecart_bounds"
     },
-
     "Health": {
         "currentHealth": 1,
         "maxHealth": 1,
         "regenRate": 1,
         "waitBeforeRegen": 2,
         "destroyEntityOnNoHealth" : true
-
     },
-    "AdditionalRails:ActivableCart" : {},
+    "AdditionalRails:ExampleActivableCart" : {},
     "Rails:RailVehicle": {},
     "Trigger": {
         "detectGroups": [

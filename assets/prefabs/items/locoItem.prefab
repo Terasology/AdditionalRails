@@ -8,7 +8,7 @@
         "icon": "Rails:minecart#loco",
         "usage": "IN_DIRECTION"
     },
-     "Rails:CartDefinition": {
-         "prefab" : "AdditionalRails:loco"
-     }
+    "Rails:CartDefinition": {
+        "prefab" : "AdditionalRails:loco"
+    }
 }
