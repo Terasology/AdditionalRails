@@ -1,0 +1,7 @@
+{
+    "Rails:Rail": {},
+    "SegmentedPaths:PathDescriptor" : {
+        "descriptors" : ["SegmentedPaths:leftFrontPath"]
+    },
+    "AdditionalRails:ActivatorRail": {}
+}

@@ -18,7 +18,6 @@ package org.terasology.additionalRails.action;
 import com.google.common.collect.Sets;
 import org.terasology.additionalRails.components.BoosterRailComponent;
 import org.terasology.entitySystem.entity.EntityRef;
-import org.terasology.entitySystem.event.EventPriority;
 import org.terasology.entitySystem.event.ReceiveEvent;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
@@ -29,7 +28,7 @@ import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.minecarts.components.RailVehicleComponent;
 import org.terasology.minecarts.controllers.CartMotionSystem;
 import org.terasology.registry.In;
-import org.terasology.segmentedpaths.components.SegmentEntityComponent;
+import org.terasology.segmentedpaths.components.PathFollowerComponent;
 import org.terasology.segmentedpaths.events.OnExitSegment;
 import org.terasology.segmentedpaths.events.OnVisitSegment;
 
@@ -57,7 +56,7 @@ public class BoosterAction extends BaseComponentSystem implements UpdateSubscrib
 
     @Override
     public void update(float delta) {
-        segmentEntities.removeIf(entityRef -> !entityRef.exists() || !entityRef.hasComponent(RailVehicleComponent.class) || !entityRef.hasComponent(SegmentEntityComponent.class));
+        segmentEntities.removeIf(entityRef -> !entityRef.exists() || !entityRef.hasComponent(RailVehicleComponent.class) || !entityRef.hasComponent(PathFollowerComponent.class));
         for (EntityRef ref: segmentEntities)
         {
             RailVehicleComponent railVehicleComponent = ref.getComponent(RailVehicleComponent.class);

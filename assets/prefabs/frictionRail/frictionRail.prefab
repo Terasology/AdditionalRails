@@ -1,0 +1,9 @@
+{
+    "Rails:Rail": {
+        "frictionCoefficient" : 0.5
+    },
+    "SegmentedPaths:PathDescriptor" : {
+        "descriptors" : ["SegmentedPaths:leftRightPath"]
+    }
+
+}

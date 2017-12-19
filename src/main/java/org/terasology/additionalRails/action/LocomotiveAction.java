@@ -27,9 +27,8 @@ import org.terasology.logic.common.ActivateEvent;
 import org.terasology.math.geom.Vector3f;
 import org.terasology.minecarts.components.RailVehicleComponent;
 import org.terasology.minecarts.controllers.CartMotionSystem;
-import org.terasology.physics.components.RigidBodyComponent;
 import org.terasology.registry.In;
-import org.terasology.segmentedpaths.components.SegmentEntityComponent;
+import org.terasology.segmentedpaths.components.PathFollowerComponent;
 
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class LocomotiveAction extends BaseComponentSystem implements UpdateSubscriberSystem {
@@ -41,10 +40,10 @@ public class LocomotiveAction extends BaseComponentSystem implements UpdateSubsc
 
     @Override
     public void update(float delta) {
-        for (EntityRef locomotiveVehicle: entityManager.getEntitiesWith(RailVehicleComponent.class, LocomotiveComponent.class, SegmentEntityComponent.class)) {
+        for (EntityRef locomotiveVehicle: entityManager.getEntitiesWith(RailVehicleComponent.class, LocomotiveComponent.class, PathFollowerComponent.class)) {
             LocomotiveComponent locomotiveComponent = locomotiveVehicle.getComponent(LocomotiveComponent.class);
             RailVehicleComponent railVehicleComponent = locomotiveVehicle.getComponent(RailVehicleComponent.class);
-            SegmentEntityComponent segmentEntityComponent = locomotiveVehicle.getComponent(SegmentEntityComponent.class);
+            PathFollowerComponent segmentEntityComponent = locomotiveVehicle.getComponent(PathFollowerComponent.class);
 
             if(locomotiveComponent.active && railVehicleComponent.velocity.lengthSquared() < 10f) {
                 Vector3f additionalVelocity = new Vector3f(segmentEntityComponent.heading).normalize().mul((20f / 2.0f) * delta);
