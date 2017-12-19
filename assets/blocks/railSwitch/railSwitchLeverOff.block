@@ -1,0 +1,6 @@
+{
+    "entity": {
+        "prefab": "AdditionalRails:railSwitchLeverOff"
+    },
+    "DisplayName": "Lever Switch"
+}
