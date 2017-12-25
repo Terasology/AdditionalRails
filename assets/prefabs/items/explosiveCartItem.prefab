@@ -1,0 +1,14 @@
+{
+    "parent": "engine:iconItem",
+    "DisplayName": {
+        "name": "Explosive Cart"
+    },
+    "Item": {
+        "name": "Explosive Cart",
+        "icon": "Rails:minecart#minecart",
+        "usage": "IN_DIRECTION"
+    },
+    "Rails:CartDefinition": {
+        "prefab" : "AdditionalRails:explosiveCart"
+    }
+}
