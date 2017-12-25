@@ -1,0 +1,95 @@
+/*
+ * Copyright 2014 Benjamin Glatzel <benjamin.glatzel@me.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Changed tiles and prefabs for the one-way booster track.
+ */
+{
+    "shadowCasting": "false",
+    "translucent" : true,
+    "rotation": "Rails:rails",
+    "penetrable" : false,
+
+    "no_connections": {
+        "tile" : "Rails:TrainTrack",
+        "shape": "engine:horizontalOffsetPlane",
+        "tiles" : {
+           "center" : "AdditionalRails:OnewayBoosterTrainTrack"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:onewayBoosterRail"
+        }
+    },
+    "one_connection": {
+         "tile" : "Rails:TrainTrack",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:OnewayBoosterTrainTrack"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:onewayBoosterRail"
+        }
+    },
+    "one_connection_slope": {
+        "tile" : "Rails:TrainTrack",
+        "shape" : "railSlope",
+        "tiles" : {
+          "center" : "AdditionalRails:OnewayBoosterTrainTrackSlope"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:onewayBoosterRailSlope"
+        }
+    },
+    "line_connection": {
+        "tile" : "Rails:TrainTrack",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:OnewayBoosterTrainTrack"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:onewayBoosterRail"
+        }
+    },
+    "2d_corner": {
+        "tile" : "Rails:TrainTrack",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:OnewayBoosterTrainTrackCurve"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:onewayBoosterRailCurve"
+        }
+    },
+    "2d_t": {
+        "tile" : "Rails:TrainTrackTee",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:OnewayBoosterTrainTrackTee"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:onewayBoosterRailTee"
+        }
+    },
+    "cross": {
+        "tile" : "Rails:TrainTrack",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:OnewayBoosterTrainTrackIntersection"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:onewayBoosterRailIntersection"
+        }
+    }
+}
+
