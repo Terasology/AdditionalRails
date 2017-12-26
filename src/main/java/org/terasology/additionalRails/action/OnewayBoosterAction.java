@@ -15,10 +15,7 @@
  */
 package org.terasology.additionalRails.action;
 
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.terasology.additionalRails.components.OnewayBoosterRailComponent;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.event.ReceiveEvent;
@@ -33,51 +30,80 @@ import org.terasology.segmentedpaths.components.PathFollowerComponent;
 import org.terasology.segmentedpaths.events.OnExitSegment;
 import org.terasology.segmentedpaths.events.OnVisitSegment;
 
-import java.util.Iterator;
-import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSubscriberSystem {
-    private Set<EntityRef> carts = Sets.newHashSet();
-    private Map<EntityRef, EntityRef> rails = Maps.newHashMap();
-
-    private final static Logger logger = LoggerFactory.getLogger(BoosterAction.class);
+    private Set<RailCart> entities = Sets.newHashSet();
+    private static final int ACCELERATION_RATE = 10;
 
     @ReceiveEvent(components = {OnewayBoosterRailComponent.class, RailComponent.class})
-    public void onEnterBoosterSegment(OnVisitSegment event, EntityRef entity) { //event.getSegmentEntity() is the rail and entity the cart
-        logger.warn("segmentEntity : " + event.getSegmentEntity().toString());
-        logger.warn("entity : " + entity.toString());
-        carts.add(entity);
-        rails.put(entity, event.getSegmentEntity());
+    public void onEnterBoosterSegment(OnVisitSegment event, EntityRef entity) { //entity is the rail and event.getSegmentEntity() the cart
+        entities.add(new RailCart(entity, event.getSegmentEntity()));
     }
 
     @ReceiveEvent(components = {OnewayBoosterRailComponent.class, RailComponent.class})
     public void onExitBoosterSegment(OnExitSegment event, EntityRef entity) {
-        carts.remove(entity);
-        rails.remove(entity);
+        entities.remove(new RailCart(entity, event.getSegmentEntity()));
     }
 
     @Override
     public void update(float delta) {
-        for(Iterator<EntityRef> itr = carts.iterator();itr.hasNext();) {
-            EntityRef cart = itr.next();
-            EntityRef rail = rails.get(cart);
-            if(!rail.exists() || !rail.hasComponent(RailVehicleComponent.class) || !rail.hasComponent(PathFollowerComponent.class)
-                    || !cart.exists() || !cart.hasComponent(OnewayBoosterRailComponent.class)) {
-                rails.remove(cart);
-                itr.remove();
-                continue;
-            }
-            accelerate(rail, (20f / 2.0f) * delta);
+        entities.removeIf(e -> !e.cart.exists() || !e.cart.hasComponent(RailVehicleComponent.class) || !e.cart.hasComponent(PathFollowerComponent.class)
+                || !e.rail.exists() || !e.rail.hasComponent(OnewayBoosterRailComponent.class));
+        for(RailCart rc : entities) {
+            accelerate(rc.cart, delta);
         }
     }
-    private void accelerate(EntityRef ref, float multiplier) {
+    /**Adds {@link OnewayBoosterAction#ACCELERATION_RATE} per delta to x or z of the velocity of {@code ref}'s {@code RailVehicleComponent}*/
+    private void accelerate(EntityRef ref, float delta) {
         RailVehicleComponent railVehicleComponent = ref.getComponent(RailVehicleComponent.class);
-        if(railVehicleComponent.velocity.lengthSquared() < 25f) {
-            Vector3f additionalVelocity = new Vector3f(railVehicleComponent.velocity).normalize().mul(multiplier);
-            railVehicleComponent.velocity.add(additionalVelocity);
+        Vector3f velocity = railVehicleComponent.velocity, accel;
+        boolean isGoingOpposite;
+        if(Math.abs(velocity.x) > Math.abs(velocity.z)) {
+            accel = new Vector3f(ACCELERATION_RATE * delta, 0, 0);
+            isGoingOpposite = (accel.x < 0) != (velocity.x < 0);
+        } else {
+            accel = new Vector3f(0, 0, ACCELERATION_RATE * delta);
+            isGoingOpposite = (accel.z < 0) != (velocity.z < 0);
+        }
+        if(velocity.lengthSquared() < 25f || isGoingOpposite) {
+            velocity.add(accel);
             ref.saveComponent(railVehicleComponent);
         }
     }
+    private class RailCart {
+        EntityRef rail, cart;
+        RailCart(EntityRef rail, EntityRef cart) {
+            this.rail = rail;
+            this.cart = cart;
+        }
+        @Override
+        public boolean equals(Object obj) {
+            if(obj instanceof RailCart) {
+                RailCart other = (RailCart) obj;
+                return this.rail == other.rail && this.cart == other.cart;
+            }
+            return false;
+        }
+        @Override
+        public int hashCode() {
+            return Objects.hash(rail, cart);
+        }
+    }
+    /*private void printDebug(EntityRef rail, EntityRef cart) {
+    LocationComponent cartL = cart.getComponent(LocationComponent.class);
+    RailVehicleComponent cartV = cart.getComponent(RailVehicleComponent.class);
+    PathFollowerComponent cartP = cart.getComponent(PathFollowerComponent.class);
+    LocationComponent railL = rail.getComponent(LocationComponent.class);
+    logger.warn("cart : ");
+    logger.warn("world position : " + cartL.getWorldPosition() + ", local position : " + cartL.getLocalPosition());
+    logger.warn("local rotation : " + cartL.getLocalRotation() + ", world rotation : " + cartL.getWorldRotation());
+    logger.warn("heading : " + cartP.heading);
+    logger.warn("velocity : " + cartV.velocity);
+    logger.warn("rail : ");
+    logger.warn("world position : " + railL.getWorldPosition() + ", local position : " + railL.getLocalPosition());
+    logger.warn("local rotation : " + railL.getLocalRotation() + ", world rotation : " + railL.getWorldRotation());
+    }*/
 }
