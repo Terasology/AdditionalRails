@@ -1,6 +1,6 @@
 {
     "id" : "AdditionalRails",
-    "version" : "0.0.1-SNAPSHOT",
+    "version" : "0.0.2-SNAPSHOT",
     "author" : "",
     "displayName" : "Additional Rails",
     "description" : "Adds additional rails to Terasology",
