@@ -61,7 +61,7 @@ public class WrenchOnewayAction extends BaseComponentSystem {
 
         byte connections = Byte.parseByte(block.getURI().getIdentifier().toString());
 
-        if(SideBitFlag.getSides(connections).size() <= 2) {
+        if(SideBitFlag.getSides(connections).size() <= 3) {
             if (block.getBlockFamily() == railFamily) {
                 blockEntityRegistry.setBlockForceUpdateEntity(position, invertFamily.getBlockByConnection(connections));
             }

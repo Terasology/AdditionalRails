@@ -1,5 +1,5 @@
 {
-  	"shadowCasting": "false",
+    "shadowCasting": "false",
     "translucent" : true,
     "rotation": "Rails:rails",
     "penetrable" : false,
@@ -53,5 +53,15 @@
         "entity": {
             "prefab": "AdditionalRails:onewayBoosterRailCurve"
         }
+    },
+    "2d_t": {
+      "tile" : "Rails:TrainTrack",
+      "shape" : "engine:horizontalOffsetPlane",
+      "tiles" : {
+          "center" : "AdditionalRails:OnewayBoosterTrainTrackTee"
+      },
+      "entity": {
+          "prefab": "AdditionalRails:onewayBoosterRailTee"
+      }
     }
 }
