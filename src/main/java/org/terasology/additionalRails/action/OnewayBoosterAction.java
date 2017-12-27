@@ -19,8 +19,11 @@ import com.google.common.collect.Sets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.additionalRails.components.OnewayBoosterRailComponent;
+import org.terasology.assets.ResourceUrn;
+import org.terasology.entitySystem.Component;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.event.ReceiveEvent;
+import org.terasology.entitySystem.prefab.Prefab;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
@@ -31,6 +34,8 @@ import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.minecarts.blocks.RailsUpdateFamily;
 import org.terasology.minecarts.components.RailVehicleComponent;
 import org.terasology.registry.In;
+import org.terasology.segmentedpaths.components.PathComponent;
+import org.terasology.segmentedpaths.components.PathDescriptorComponent;
 import org.terasology.segmentedpaths.components.PathFollowerComponent;
 import org.terasology.segmentedpaths.events.OnExitSegment;
 import org.terasology.segmentedpaths.events.OnVisitSegment;
@@ -38,6 +43,7 @@ import org.terasology.world.block.Block;
 import org.terasology.world.block.BlockComponent;
 import org.terasology.world.block.BlockManager;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -70,20 +76,23 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
             Rotation rotation = family.getRotationFor(block.getURI());
             float yaw = rotation.getYaw().getRadians();
             Vector3f railDirection = new Vector3f((float) Math.cos(yaw), 0, (float) Math.sin(yaw)); //https://stackoverflow.com/a/1568687
+            //Also boost y-axis if the rail is a slope.
+            if(rc.cart.getComponent(PathFollowerComponent.class).descriptor.getUrn().equals(new ResourceUrn("SegmentedPaths:slopePath")))
+                railDirection.addY(1); //Safe to add 1 in any case, since every original slope rail points upward and inverted ones downward,
             if(family == blockManager.getBlockFamily("AdditionalRails:OnewayBoosterRailInverted"))
                 railDirection.invert();
-            //Currently the direction the tiles point to is the opposite of the real direction they send carts to on Z axis.
-            //TODO: fix this fundamentally
+            //On Z axis, the direction the tiles point to is the opposite of the real direction they send carts to.
             railDirection.mulZ(-1);
             push(rc.cart, railDirection.mul(PUSH_RATE * delta));
         }
     }
     /**Adds {@code thisMuch} to the velocity of {@code ref}'s {@code RailVehicleComponent}
-     * if it doesn't exceed {@link #VELOCITY_LENGTH_MAX}.*/
+     * if it doesn't exceed {@link #VELOCITY_LENGTH_MAX} or the addition decreases it.*/
     private void push(EntityRef ref, Vector3f thisMuch) {
         RailVehicleComponent railVehicleComponent = ref.getComponent(RailVehicleComponent.class);
         Vector3f velocity = railVehicleComponent.velocity;
-        if(velocity.lengthSquared() < VELOCITY_LENGTH_MAX) {
+        //Allow pushing if the velocity doesn't exceed the maximum or decreases after the operation.
+        if(velocity.lengthSquared() < VELOCITY_LENGTH_MAX || new Vector3f(velocity).add(thisMuch).lengthSquared() <= VELOCITY_LENGTH_MAX) {
             velocity.add(thisMuch);
             ref.saveComponent(railVehicleComponent);
         }
