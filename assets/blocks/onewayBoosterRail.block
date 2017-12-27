@@ -63,5 +63,15 @@
       "entity": {
           "prefab": "AdditionalRails:onewayBoosterRailTee"
       }
+    },
+  "cross": {
+    "tile" : "Rails:TrainTrack",
+    "shape" : "engine:horizontalOffsetPlane",
+    "tiles" : {
+      "center" : "AdditionalRails:OnewayBoosterTrainTrackIntersection"
+    },
+    "entity": {
+      "prefab": "AdditionalRails:onewayBoosterRailIntersection"
     }
+  }
 }
