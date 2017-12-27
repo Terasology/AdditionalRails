@@ -1,8 +1,12 @@
 {
   "Rails:Rail": {},
   "SegmentedPaths:PathDescriptor" : {
-	"descriptors" : ["SegmentedPaths:leftRightPath"]
+    "descriptors" : ["SegmentedPaths:leftRightPath"]
   },
-  "AdditionalRails:OnewayBoosterRail": {}
-
+  "AdditionalRails:OnewayBoosterRail": {},
+  "BlockDropGrammar" : {
+    "blockDrops": [
+      "AdditionalRails:OnewayBoosterRail"
+    ]
+  }
 }

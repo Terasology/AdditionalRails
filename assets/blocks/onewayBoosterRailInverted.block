@@ -1,0 +1,47 @@
+{
+  "shadowCasting": "false",
+  "translucent" : true,
+  "rotation": "Rails:rails",
+  "penetrable" : false,
+
+  "no_connections": {
+	"tile" : "Rails:TrainTrack",
+	"shape": "engine:horizontalOffsetPlane",
+	"tiles" : {
+	  "center" : "AdditionalRails:OnewayBoosterTrainTrackInverted"
+	},
+	"entity": {
+	  "prefab": "AdditionalRails:onewayBoosterRail"
+	}
+  },
+  "one_connection": {
+	"tile" : "Rails:TrainTrack",
+	"shape" : "engine:horizontalOffsetPlane",
+	"tiles" : {
+	  "center" : "AdditionalRails:OnewayBoosterTrainTrackInverted"
+	},
+	"entity": {
+	  "prefab": "AdditionalRails:onewayBoosterRail"
+	}
+  },
+  "one_connection_slope": {
+	"tile" : "Rails:TrainTrack",
+	"shape" : "railSlope",
+	"tiles" : {
+	  "center" : "AdditionalRails:OnewayBoosterTrainTrackSlopeInverted"
+	},
+	"entity": {
+	  "prefab": "AdditionalRails:onewayBoosterRailSlope"
+	}
+  },
+  "line_connection": {
+	"tile" : "Rails:TrainTrack",
+	"shape" : "engine:horizontalOffsetPlane",
+	"tiles" : {
+	  "center" : "AdditionalRails:OnewayBoosterTrainTrackInverted"
+	},
+	"entity": {
+	  "prefab": "AdditionalRails:onewayBoosterRail"
+	}
+  }
+}
