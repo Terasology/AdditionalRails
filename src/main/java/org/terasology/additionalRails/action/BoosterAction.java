@@ -46,12 +46,12 @@ public class BoosterAction extends BaseComponentSystem implements UpdateSubscrib
 
     @ReceiveEvent(components = {BoosterRailComponent.class, RailComponent.class})
     public void onEnterBoosterSegment(OnVisitSegment event, EntityRef entity) {
-        segmentEntities.add(event.getSegmentEntity());
+        segmentEntities.add(event.getPathFollowingEntity());
     }
 
     @ReceiveEvent(components = {BoosterRailComponent.class, RailComponent.class})
     public void onExitBoosterSegment(OnExitSegment event, EntityRef entity) {
-        segmentEntities.remove(event.getSegmentEntity());
+        segmentEntities.remove(event.getPathFollowingEntity());
     }
 
     @Override

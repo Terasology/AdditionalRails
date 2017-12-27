@@ -28,7 +28,7 @@ public class ActivatorAction extends BaseComponentSystem {
      */
     @ReceiveEvent(components = {ActivatorRailComponent.class, RailComponent.class})
     public void onEnterActivatorSegment(OnVisitSegment event, EntityRef entity) {
-        EntityRef segmentEntity = event.getSegmentEntity();
+        EntityRef segmentEntity = event.getPathFollowingEntity();
         segmentEntity.send(new CartActivatedEvent());
     }
 
@@ -40,7 +40,7 @@ public class ActivatorAction extends BaseComponentSystem {
      */
     @ReceiveEvent(components = {ActivatorRailComponent.class, RailComponent.class})
     public void onExitActivatorSegment(OnExitSegment event, EntityRef entity) {
-        EntityRef segmentEntity = event.getSegmentEntity();
+        EntityRef segmentEntity = event.getPathFollowingEntity();
         segmentEntity.send(new CartDeactivatedEvent());
     }
 }

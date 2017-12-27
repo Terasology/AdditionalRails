@@ -7,7 +7,7 @@
     "dependencies" : [
         {
             "id": "Rails",
-            "minVersion": "0.3.5"
+            "minVersion": "0.3.7"
         },
         {
             "id": "Core",
