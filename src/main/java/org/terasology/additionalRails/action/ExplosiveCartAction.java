@@ -55,7 +55,7 @@ public class ExplosiveCartAction extends BaseComponentSystem {
         if (event.getActionId().equals(CART_EXPLOSION_ACTION_ID)) {
             entity.addComponent(new ExplosionActionComponent());
             //DelayedActionTriggeredEvent is sent without the delay (what a paradox lol) to ka-boom-kachow the cart.
-            entity.send(new DelayedActionTriggeredEvent(entity.send(new DelayedActionTriggeredEvent("Delayed Explosion"/*ExplosionAuthoritySystem.DELAYED_EXPLOSION_ACTION_ID*/));));
+            entity.send(new DelayedActionTriggeredEvent("Delayed Explosion"/*ExplosionAuthoritySystem.DELAYED_EXPLOSION_ACTION_ID*/));
         }
     }
 
