@@ -1,7 +1,7 @@
 {
   "Rails:Rail": {},
   "SegmentedPaths:PathDescriptor" : {
-    "descriptors" : ["SegmentedPaths:slopePath"]
+    "descriptors" : ["SegmentedPaths:leftRightPath", "SegmentedPaths:frontBackPath"]
   },
   "AdditionalRails:OnewayBoosterRail": {},
   "BlockDropGrammar" : {

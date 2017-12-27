@@ -44,7 +44,7 @@ import java.util.Set;
 
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSubscriberSystem {
-    private Set<RailCart> entities = Sets.newHashSet(); //The set of all pairs of a tile of rail and a cart on it
+    private Set<RailCart> entities = Sets.newHashSet(); //The set of all pairs of a tile of OnewayBoosterRail and a vehicle on it
     private static final int PUSH_RATE = 20, VELOCITY_LENGTH_MAX = 25;
     @In
     private BlockManager blockManager; //For retrieving the block family
