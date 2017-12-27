@@ -49,8 +49,6 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
     @In
     private BlockManager blockManager; //For retrieving the block family
 
-    private static final Logger logger = LoggerFactory.getLogger(OnewayBoosterAction.class);
-
     @ReceiveEvent(components = {OnewayBoosterRailComponent.class, RailComponent.class})
     public void onEnterBoosterSegment(OnVisitSegment event, EntityRef entity) { //entity is the rail and event.getSegmentEntity() the cart
         entities.add(new RailCart(entity, event.getSegmentEntity()));
@@ -68,16 +66,19 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
         for(RailCart rc : entities) {
             Block block = rc.rail.getComponent(BlockComponent.class).getBlock();
             RailsUpdateFamily family = (RailsUpdateFamily) block.getBlockFamily();
+            //Get the direction of the rail
             Rotation rotation = family.getRotationFor(block.getURI());
             float yaw = rotation.getYaw().getRadians();
             Vector3f railDirection = new Vector3f((float) Math.cos(yaw), 0, (float) Math.sin(yaw)); //https://stackoverflow.com/a/1568687
+            //Modify the direction
             //Also boost y-axis if the rail is a slope.
             if(rc.cart.getComponent(PathFollowerComponent.class).descriptor.getUrn().equals(new ResourceUrn("SegmentedPaths:slopePath")))
-                railDirection.addY(1); //Safe to add 1 in any case, since every original slope rail points upward and inverted ones downward,
+                railDirection.addY(1); //Every original slope rail points upward and inverted ones downward, so the y value will always be correct after inverting below.
             if(family == blockManager.getBlockFamily("AdditionalRails:OnewayBoosterRailInverted"))
                 railDirection.invert();
             //On z-axis, the direction the tile images point to is the opposite of the real direction they send carts to.
             railDirection.mulZ(-1);
+
             push(rc.cart, railDirection.mul(PUSH_RATE * delta));
         }
     }
@@ -86,7 +87,7 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
     private void push(EntityRef ref, Vector3f thisMuch) {
         RailVehicleComponent railVehicleComponent = ref.getComponent(RailVehicleComponent.class);
         Vector3f velocity = railVehicleComponent.velocity;
-        //Allow pushing if the velocity doesn't exceed the maximum or decreases after the operation.
+        //Allow pushing if the velocity decreases after the operation or doesn't exceed the maximum.
         if(velocity.lengthSquared() < VELOCITY_LENGTH_MAX || new Vector3f(velocity).add(thisMuch).lengthSquared() <= VELOCITY_LENGTH_MAX) {
             velocity.add(thisMuch);
             ref.saveComponent(railVehicleComponent);
