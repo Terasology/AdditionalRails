@@ -5,44 +5,44 @@
   "penetrable" : false,
 
   "no_connections": {
-	"tile" : "Rails:TrainTrack",
-	"shape": "engine:horizontalOffsetPlane",
-	"tiles" : {
-	  "center" : "AdditionalRails:OnewayBoosterTrainTrackInverted"
-	},
-	"entity": {
-	  "prefab": "AdditionalRails:onewayBoosterRail"
-	}
+    "tile" : "Rails:TrainTrack",
+    "shape": "engine:horizontalOffsetPlane",
+    "tiles" : {
+      "center" : "AdditionalRails:OnewayBoosterTrainTrackInverted"
+    },
+    "entity": {
+      "prefab": "AdditionalRails:onewayBoosterRail"
+    }
   },
   "one_connection": {
-	"tile" : "Rails:TrainTrack",
-	"shape" : "engine:horizontalOffsetPlane",
-	"tiles" : {
-	  "center" : "AdditionalRails:OnewayBoosterTrainTrackInverted"
-	},
-	"entity": {
-	  "prefab": "AdditionalRails:onewayBoosterRail"
-	}
+    "tile" : "Rails:TrainTrack",
+    "shape" : "engine:horizontalOffsetPlane",
+    "tiles" : {
+      "center" : "AdditionalRails:OnewayBoosterTrainTrackInverted"
+    },
+    "entity": {
+      "prefab": "AdditionalRails:onewayBoosterRail"
+    }
   },
   "one_connection_slope": {
-	"tile" : "Rails:TrainTrack",
-	"shape" : "railSlope",
-	"tiles" : {
-	  "center" : "AdditionalRails:OnewayBoosterTrainTrackSlopeInverted"
-	},
-	"entity": {
-	  "prefab": "AdditionalRails:onewayBoosterRailSlope"
-	}
+    "tile" : "Rails:TrainTrack",
+    "shape" : "railSlope",
+    "tiles" : {
+      "center" : "AdditionalRails:OnewayBoosterTrainTrackSlopeInverted"
+    },
+    "entity": {
+      "prefab": "AdditionalRails:onewayBoosterRailSlope"
+    }
   },
   "line_connection": {
-	"tile" : "Rails:TrainTrack",
-	"shape" : "engine:horizontalOffsetPlane",
-	"tiles" : {
-	  "center" : "AdditionalRails:OnewayBoosterTrainTrackInverted"
-	},
-	"entity": {
-	  "prefab": "AdditionalRails:onewayBoosterRail"
-	}
+    "tile" : "Rails:TrainTrack",
+    "shape" : "engine:horizontalOffsetPlane",
+    "tiles" : {
+      "center" : "AdditionalRails:OnewayBoosterTrainTrackInverted"
+    },
+    "entity": {
+      "prefab": "AdditionalRails:onewayBoosterRail"
+    }
   },
   "2d_corner": {
     "tile" : "Rails:TrainTrack",
@@ -52,6 +52,16 @@
     },
     "entity": {
       "prefab": "AdditionalRails:onewayBoosterRailCurve"
+    }
+  },
+  "2d_t": {
+    "tile" : "Rails:TrainTrack",
+    "shape" : "engine:horizontalOffsetPlane",
+    "tiles" : {
+      "center" : "AdditionalRails:OnewayBoosterTrainTrackTeeInverted"
+        },
+    "entity": {
+      "prefab": "AdditionalRails:onewayBoosterRailTeeInverted"
     }
   }
 }
