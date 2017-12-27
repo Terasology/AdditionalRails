@@ -16,8 +16,6 @@
 package org.terasology.additionalRails.action;
 
 import com.google.common.collect.Sets;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.terasology.additionalRails.components.OnewayBoosterRailComponent;
 import org.terasology.assets.ResourceUrn;
 import org.terasology.entitySystem.entity.EntityRef;
