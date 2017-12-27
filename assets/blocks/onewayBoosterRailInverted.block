@@ -43,5 +43,15 @@
 	"entity": {
 	  "prefab": "AdditionalRails:onewayBoosterRail"
 	}
+  },
+  "2d_corner": {
+    "tile" : "Rails:TrainTrack",
+    "shape" : "engine:horizontalOffsetPlane",
+    "tiles" : {
+      "center" : "AdditionalRails:OnewayBoosterTrainTrackCurveInverted"
+    },
+    "entity": {
+      "prefab": "AdditionalRails:onewayBoosterRailCurve"
+    }
   }
 }

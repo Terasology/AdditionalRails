@@ -21,7 +21,7 @@
           "center" : "AdditionalRails:OnewayBoosterTrainTrack"
         },
         "entity": {
-            "prefab": "AdditionalRails:onewayBoosterRail"
+          "prefab": "AdditionalRails:onewayBoosterRail"
         }
     },
     "one_connection_slope": {
