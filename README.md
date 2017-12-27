@@ -6,6 +6,7 @@
 
 ## Rails
 - Booster Rail: A rail segment that boosts carts that pass over it.
+- One-way Booster Rail: A rail segment that boosts carts only toward one direction.
 
 ## Switches
 - Lever Switch: A switch, which controls the rail juntion direction, controlled by 'use target' action (usually 'E' key)
