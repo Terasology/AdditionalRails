@@ -1,6 +1,6 @@
 {
   "Rails:Rail": {},
-  "SegmentedPaths:PathDescriptor":{
+  "SegmentedPaths:PathDescriptor" : {
 	"descriptors" : ["SegmentedPaths:slopePath"]
   },
   "AdditionalRails:OnewayBoosterRail": {}

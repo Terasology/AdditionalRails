@@ -1,8 +1,0 @@
-{
-  "Rails:Rail": {},
-  "SegmentedPaths:PathDescriptor":{
-	"descriptors" : ["SegmentedPaths:leftRightPath","SegmentedPaths:frontBackPath"]
-  },
-  "AdditionalRails:OnewayBoosterRail": {}
-
-}
