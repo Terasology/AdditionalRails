@@ -3,6 +3,7 @@
 ## Carts
 - Locomotive Cart: A cart that is self powered.
 - Activable Cart Example: A cart, which prints out a message to the logger when activated by Activator Rail.
+- Explosive Cart: A cart, that will explode once it passes over an activator Rail.(Requires https://github.com/MovingBlocks/Terasology/pull/3195)
 
 ## Rails
 - Booster Rail: A rail segment that boosts carts that pass over it.
