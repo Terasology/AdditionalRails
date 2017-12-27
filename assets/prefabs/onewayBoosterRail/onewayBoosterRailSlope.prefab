@@ -1,0 +1,12 @@
+{
+  "Rails:Rail": {},
+  "SegmentedPaths:PathDescriptor" : {
+    "descriptors" : ["SegmentedPaths:slopePath"]
+  },
+  "AdditionalRails:OnewayBoosterRail": {},
+  "BlockDropGrammar" : {
+    "blockDrops": [
+      "AdditionalRails:OnewayBoosterRail"
+    ]
+  }
+}
