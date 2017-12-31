@@ -1,5 +1,5 @@
 {
-     "type": "TrackLayerCartScreen",
+     "type": "TunnelBoreCartScreen",
      "skin": "inventoryDefault",
      "contents": {
          "type": "relativeLayout",
