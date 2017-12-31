@@ -73,14 +73,19 @@ public class TunnelBoreCartAction extends BaseComponentSystem implements UpdateS
             
             worldProvider.setBlock(digCenter, air);
             worldProvider.setBlock(digCenter.add(Vector3i.up()), air);
-            worldProvider.setBlock(nextBlock.add(right), air);
+            worldProvider.setBlock(digCenter.add(right), air);
             worldProvider.setBlock(digCenter.add(Vector3i.down()), air);
             worldProvider.setBlock(digCenter.add(Vector3i.down()), air);
-            worldProvider.setBlock(nextBlock.add(left), air);
-            worldProvider.setBlock(nextBlock.add(left), air);
+            if(!worldProvider.getBlock(digCenter.add(left)).getBlockFamily().equals(ruFamily))
+                worldProvider.setBlock(digCenter, air);
+            worldProvider.setBlock(digCenter.add(left), air);
             worldProvider.setBlock(digCenter.add(Vector3i.up()), air);
             worldProvider.setBlock(digCenter.add(Vector3i.up()), air);
 
+            if(worldProvider.getBlock(nextBlock).getBlockFamily().equals(ruFamily)) {
+                continue;
+            }
+            
             Block underNextBlock = worldProvider.getBlock(new Vector3i(nextBlock).add(Vector3i.down()));
             if (underNextBlock.isPenetrable() || underNextBlock.isLiquid()) {
                 continue;

@@ -16,6 +16,18 @@
         {
             "id": "Signalling",
             "minVersion": "0.1.1"
+        },
+	{
+            "id": "SegmentedPaths",
+            "minVersion": "0.2.0"
+        },
+	{
+            "id": "ModularComputers",
+            "minVersion": "0.1.1"
+        },
+	{
+            "id": "MarcinScIncubator",
+            "minVersion": "0.1.1"
         }
     ]
 }
