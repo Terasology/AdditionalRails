@@ -4,7 +4,7 @@
         "name": "Tunnel Bore Cart"
     },
     "Item": {
-        "name": "Track Layer Cart",
+        "name": "Tunnel Bore Cart",
         "icon": "Rails:minecart#minecart",
         "usage": "IN_DIRECTION"
     },
