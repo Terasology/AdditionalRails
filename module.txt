@@ -7,15 +7,19 @@
     "dependencies" : [
         {
             "id": "Rails",
-            "minVersion": "0.3.7"
+            "minVersion": "0.3.7-SNAPSHOT"
         },
         {
             "id": "Core",
-            "minVersion": "1.0.0"
+            "minVersion": "1.5.1-SNAPSHOT"
         },
         {
             "id": "Signalling",
-            "minVersion": "0.1.1"
+            "minVersion": "0.1.1-SNAPSHOT"
+        },
+        {
+            "id": "SimpleFarming",
+            "minVersion":"2.0.1-SNAPSHOT"
         }
     ]
 }
