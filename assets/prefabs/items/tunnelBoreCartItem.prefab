@@ -1,0 +1,14 @@
+{
+    "parent": "engine:iconItem",
+    "DisplayName": {
+        "name": "Tunnel Bore Cart"
+    },
+    "Item": {
+        "name": "Tunnel Bore Cart",
+        "icon": "Rails:minecart#minecart",
+        "usage": "IN_DIRECTION"
+    },
+    "Rails:CartDefinition": {
+        "prefab" : "AdditionalRails:tunnelBoreCart"
+    }
+}
