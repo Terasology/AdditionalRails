@@ -1,0 +1,14 @@
+{
+    "parent": "engine:iconItem",
+    "DisplayName": {
+        "name": "Hoover Cart"
+    },
+    "Item": {
+        "name": "Hoover Cart",
+        "icon": "Rails:minecart#minecart",
+        "usage": "IN_DIRECTION"
+    },
+    "Rails:CartDefinition": {
+        "prefab" : "AdditionalRails:hooverCart"
+    }
+}

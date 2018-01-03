@@ -1,0 +1,53 @@
+{
+    "type": "HooverCartScreen",
+    "skin": "inventoryDefault",
+    "contents": {
+        "type": "relativeLayout",
+        "contents": [
+            {
+                "type": "InventoryGrid",
+                "id": "inventory",
+                "maxHorizontalCells": 10,
+                "layoutInfo": {
+                    "use-content-width": true,
+                    "use-content-height": true,
+                    "position-bottom": {
+                        "target": "BOTTOM",
+                        "offset": 128
+                    },
+                    "position-horizontal-center": {}
+                }
+            },
+            {
+                "type": "UILabel",
+                "id": label,
+                "text": "Put the fuel into upper-left corner",
+                "layoutInfo": {
+                    "use-content-width": true,
+                    "use-content-height": true,
+                    "position-bottom": {
+                        "target": "TOP",
+                        "offset": 8,
+                        "widget": "inventory"
+                    },
+                    "position-horizontal-center": {}
+                }
+            },
+            {
+                "type": "InventoryGrid",
+                "id": "container",
+                "maxHorizontalCells": 5,
+                "layoutInfo": {
+                    "use-content-width": true,
+                    "use-content-height": true,
+                    "position-bottom": {
+                        "target": "TOP",
+                        "widget": "label",
+                        "offset": 8
+                    },
+                    "position-horizontal-center": {}
+                }
+            }
+        ]
+    }
+}
