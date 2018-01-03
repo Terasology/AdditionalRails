@@ -19,6 +19,14 @@
     "HullShape": {
         "sourceMesh" : "Rails:minecart_bounds"
     },
+    "CartJoint":{
+        "front": {
+            "range": 0.7
+        },
+        "back": {
+            "range": 0.7
+        }
+    },
     "Health": {
         "currentHealth": 1,
         "maxHealth": 1,
@@ -26,8 +34,7 @@
         "waitBeforeRegen": 2,
         "destroyEntityOnNoHealth" : true
     },
-    "AdditionalRails:HooverCart" : {
-    },
+    "AdditionalRails:HooverCart": {},
     "Rails:RailVehicle": {},
     "Trigger": {
         "detectGroups": [
