@@ -37,6 +37,7 @@ import org.terasology.world.block.BlockManager;
 
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class PlantAction extends BaseComponentSystem {
+
     private Block airBlock;
 
     @In
@@ -50,6 +51,21 @@ public class PlantAction extends BaseComponentSystem {
 
     @In
     private EntityManager entityManager;
+
+    public void planting(EntityRef entity, Vector3i vector){
+        for (int i = 0; i <= 30; i++) {
+            EntityRef myseed = inventoryManager.getItemInSlot(entity, i);
+            if (myseed.hasComponent(SeedDefinitionComponent.class)) {
+                SeedDefinitionComponent seedComponent = myseed.getComponent(SeedDefinitionComponent.class);
+                EntityRef seed = myseed;
+                EntityRef plantEntity = seedComponent.prefab == null ? seed : entityManager.create(seedComponent.prefab);
+                plantEntity.send(new OnSeedPlanted(vector));
+                inventoryManager.removeItem(seed.getOwner(), seed, seed, true, 1);
+                break;
+
+            }
+        }
+    }
 
     @ReceiveEvent(components = {PlantCartComponent.class})
     public void cartActivatedEvent(CartActivatedEvent event, EntityRef entity) {
@@ -65,42 +81,26 @@ public class PlantAction extends BaseComponentSystem {
         Vector3i leftVector = direction.toSide().yawClockwise(1).getVector3i();
         Vector3i rightVector = direction.toSide().yawClockwise(3).getVector3i();
 
-        Vector3i leftPositiona = new Vector3i(location).add(leftVector);
-        Vector3i rightPositionb = new Vector3i(location).add(rightVector);
+        Vector3i leftPosition = new Vector3i(location).add(leftVector);
+        Vector3i rightPosition = new Vector3i(location).add(rightVector);
 
-        Vector3i leftPosition = new Vector3i(leftPositiona).add(Vector3i.down());
-        Vector3i rightPosition = new Vector3i(rightPositionb).add(Vector3i.down());
+        Vector3i leftdownPosition = new Vector3i(leftPosition).add(Vector3i.down());
+        Vector3i rightdownPosition = new Vector3i(rightPosition).add(Vector3i.down());
 
-        Block a = worldprovider.getBlock(leftPosition);
-        Block b = worldprovider.getBlock(rightPosition);
+        Block leftdown = worldprovider.getBlock(leftdownPosition);
+        Block rightdown = worldprovider.getBlock(rightdownPosition);
+        Block left = worldprovider.getBlock(leftPosition);
+        Block right = worldprovider.getBlock(rightPosition);
 
-        if (a.getDisplayName() != airBlock.getDisplayName()) {
-            for (int i = 0; i <= 30; i++) {
-                EntityRef myseed = inventoryManager.getItemInSlot(entity, i);
-                if (myseed.hasComponent(SeedDefinitionComponent.class)) {
-                    SeedDefinitionComponent seedComponent = myseed.getComponent(SeedDefinitionComponent.class);
-                    EntityRef seed = myseed;
-                    EntityRef plantEntity = seedComponent.prefab == null ? seed : entityManager.create(seedComponent.prefab);
-                    plantEntity.send(new OnSeedPlanted(leftPositiona));
-                    inventoryManager.removeItem(seed.getOwner(), seed, seed, true, 1);
-                    break;
-
-                }
+        if (leftdown!= airBlock) {
+            if(left == airBlock){
+                planting(entity, leftPosition);
             }
 
         }
-        if (b.getDisplayName() != airBlock.getDisplayName()) {
-            for (int i = 0; i <= 30; i++) {
-                EntityRef myseed = inventoryManager.getItemInSlot(entity, i);
-                if (myseed.hasComponent(SeedDefinitionComponent.class)) {
-                    SeedDefinitionComponent seedComponent = myseed.getComponent(SeedDefinitionComponent.class);
-                    EntityRef seed = myseed;
-                    EntityRef plantEntity = seedComponent.prefab == null ? seed : entityManager.create(seedComponent.prefab);
-                    plantEntity.send(new OnSeedPlanted(rightPositionb));
-                    inventoryManager.removeItem(seed.getOwner(), seed, seed, true, 1);
-                    break;
-
-                }
+        if (rightdown != airBlock) {
+            if(right == airBlock){
+                planting(entity, rightPosition);
             }
         }
     }
