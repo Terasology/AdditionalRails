@@ -1,0 +1,14 @@
+{
+    "parent": "engine:iconItem",
+    "DisplayName": {
+        "name": "Harvesting Cart"
+    },
+    "Item": {
+        "name": "Harvesting Cart",
+        "icon": "Rails:minecart#minecart",
+        "usage": "IN_DIRECTION"
+    },
+    "Rails:CartDefinition": {
+        "prefab" : "AdditionalRails:harvestingCart"
+    }
+}
