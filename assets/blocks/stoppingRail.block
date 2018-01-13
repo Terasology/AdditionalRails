@@ -1,0 +1,77 @@
+{
+    "shadowCasting": "false",
+    "translucent" : true,
+    "rotation": "Rails:rails",
+    "penetrable" : false,
+
+    "no_connections": {
+        "tile" : "Rails:TrainTrack",
+        "shape": "engine:horizontalOffsetPlane",
+        "tiles" : {
+           "center" : "AdditionalRails:StoppingTrainTrack"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:stoppingRail"
+        }
+    },
+    "one_connection": {
+         "tile" : "Rails:TrainTrack",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:StoppingTrainTrack"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:stoppingRail"
+        }
+    },
+    "one_connection_slope": {
+        "tile" : "Rails:TrainTrack",
+        "shape" : "railSlope",
+        "tiles" : {
+          "center" : "AdditionalRails:StoppingTrainTrackSlope"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:stoppingRailSlope"
+        }
+    },
+    "line_connection": {
+        "tile" : "Rails:TrainTrack",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:StoppingTrainTrack"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:stoppingRail"
+        }
+    },
+    "2d_corner": {
+        "tile" : "Rails:TrainTrack",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:StoppingTrainTrackCurve"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:stoppingRailCurve"
+        }
+    },
+    "2d_t": {
+        "tile" : "Rails:TrainTrackTee",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:StoppingTrainTrackTee"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:stoppingRailTee"
+        }
+    },
+    "cross": {
+        "tile" : "Rails:TrainTrack",
+        "shape" : "engine:horizontalOffsetPlane",
+        "tiles" : {
+          "center" : "AdditionalRails:StoppingTrainTrackIntersection"
+        },
+        "entity": {
+            "prefab": "AdditionalRails:stoppingRailIntersection"
+        }
+    }
+}
