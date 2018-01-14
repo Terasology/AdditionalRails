@@ -65,11 +65,15 @@ public class CollectingAction extends BaseComponentSystem {
                 if(block.hasComponent(InventoryComponent.class)){
                     for (int i = 0; i < size; i++) {
                         EntityRef item = inventoryManager.getItemInSlot(entity, i);
-                        if(item.exists()){
+                        if(item.exists()) {
+                            int StackSize = inventoryManager.getStackSize(item);
                             Prefab prefab = item.getParentPrefab();
                             EntityRef newitem = entityManager.create(prefab);
-                            inventoryManager.giveItem(block, block, newitem);
-                            inventoryManager.removeItem(entity,block,item,true);
+                            for (int a = 0; a < StackSize; a++) {
+                                inventoryManager.giveItem(block, block, newitem);
+                            }
+                            inventoryManager.removeItem(entity, block, item, true);
+
                         }
                     }
                 }
