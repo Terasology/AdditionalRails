@@ -18,8 +18,10 @@ package org.terasology.additionalRails.action;
 import com.google.common.collect.ImmutableList;
 import org.terasology.additionalRails.components.CollectingBlockComponent;
 import org.terasology.additionalRails.events.CartActivatedEvent;
+import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.event.ReceiveEvent;
+import org.terasology.entitySystem.prefab.Prefab;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
@@ -37,17 +39,21 @@ public class CollectingAction extends BaseComponentSystem {
     private InventoryManager inventoryManager;
     @In
     private BlockEntityRegistry blockEntityRegistry;
+    @In
+    private EntityManager entityManager;
 
     @ReceiveEvent(components={InventoryComponent.class})
     public void onActivateBlock(CartActivatedEvent event, EntityRef entity) {
+        InventoryComponent inventoryComponent = entity.getComponent(InventoryComponent.class);
+        int size = inventoryComponent.itemSlots.size();
+
+        PathFollowerComponent pfComponent = entity.getComponent(PathFollowerComponent.class);
+        EntityRef entityref = pfComponent.segmentMeta.association;
+
+        BlockComponent blockcomponent = entityref.getComponent(BlockComponent.class);
+        Vector3i location = new Vector3i(blockcomponent.getPosition());
 
         for(Vector3i v: ImmutableList.of(Vector3i.west(), Vector3i.east(), Vector3i.north(), Vector3i.south())){
-
-            PathFollowerComponent pfComponent = entity.getComponent(PathFollowerComponent.class);
-            EntityRef entityref = pfComponent.segmentMeta.association;
-
-            BlockComponent blockcomponent = entityref.getComponent(BlockComponent.class);
-            Vector3i location = new Vector3i(blockcomponent.getPosition());
 
             Vector3i Position = new Vector3i(location).add(v);
 
@@ -57,10 +63,12 @@ public class CollectingAction extends BaseComponentSystem {
 
             if(component!=null){
                 if(block.hasComponent(InventoryComponent.class)){
-                    for (int i = 0; i < 30; i++) {
+                    for (int i = 0; i < size; i++) {
                         EntityRef item = inventoryManager.getItemInSlot(entity, i);
                         if(item.exists()){
-                            inventoryManager.moveItem(entity,block,i,block,i,1);
+                            Prefab prefab = item.getParentPrefab();
+                            EntityRef newitem = entityManager.create(prefab);
+                            inventoryManager.giveItem(block, block, newitem);
                             inventoryManager.removeItem(entity,block,item,true);
                         }
                     }
