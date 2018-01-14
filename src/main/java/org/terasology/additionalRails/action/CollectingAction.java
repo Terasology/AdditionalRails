@@ -15,8 +15,7 @@
  */
 package org.terasology.additionalRails.action;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.google.common.collect.ImmutableList;
 import org.terasology.additionalRails.components.CollectingBlockComponent;
 import org.terasology.additionalRails.events.CartActivatedEvent;
 import org.terasology.entitySystem.entity.EntityRef;
@@ -42,64 +41,28 @@ public class CollectingAction extends BaseComponentSystem {
     @ReceiveEvent(components={InventoryComponent.class})
     public void onActivateBlock(CartActivatedEvent event, EntityRef entity) {
 
-        PathFollowerComponent pfComponent = entity.getComponent(PathFollowerComponent.class);
-        EntityRef entityref = pfComponent.segmentMeta.association;
+        for(Vector3i v: ImmutableList.of(Vector3i.west(), Vector3i.east(), Vector3i.north(), Vector3i.south())){
 
-        BlockComponent blockcomponent = entityref.getComponent(BlockComponent.class);
-        Vector3i location = new Vector3i(blockcomponent.getPosition());
+            PathFollowerComponent pfComponent = entity.getComponent(PathFollowerComponent.class);
+            EntityRef entityref = pfComponent.segmentMeta.association;
 
-        Vector3i leftPosition = new Vector3i(location).add(Vector3i.west());
-        Vector3i rightPosition = new Vector3i(location).add(Vector3i.east());
-        Vector3i frontPosition = new Vector3i(location).add(Vector3i.north());
-        Vector3i backPosition = new Vector3i(location).add(Vector3i.south());
+            BlockComponent blockcomponent = entityref.getComponent(BlockComponent.class);
+            Vector3i location = new Vector3i(blockcomponent.getPosition());
 
-        EntityRef block1=blockEntityRegistry.getExistingEntityAt(leftPosition);
-        EntityRef block2=blockEntityRegistry.getExistingEntityAt(rightPosition);
-        EntityRef block3=blockEntityRegistry.getExistingEntityAt(frontPosition);
-        EntityRef block4=blockEntityRegistry.getExistingEntityAt(backPosition);
+            Vector3i Position = new Vector3i(location).add(v);
 
-        CollectingBlockComponent component1 = block1.getComponent(CollectingBlockComponent.class);
-        CollectingBlockComponent component2 = block2.getComponent(CollectingBlockComponent.class);
-        CollectingBlockComponent component3 = block3.getComponent(CollectingBlockComponent.class);
-        CollectingBlockComponent component4 = block4.getComponent(CollectingBlockComponent.class);
+            EntityRef block=blockEntityRegistry.getExistingEntityAt(Position);
 
-        if(component1!=null){
-            if(block1.hasComponent(InventoryComponent.class)){
-                for (int i = 0; i < 30; i++) {
-                    EntityRef item = inventoryManager.getItemInSlot(entity, i);
-                    if(item.exists()){
-                        inventoryManager.moveItem(entity,block1,i,block1,i,1);
-                        inventoryManager.removeItem(entity,block1,item,true);
-                    }
-                }
-            }
-        }else if(component2!=null){
-            if(block2.hasComponent(InventoryComponent.class)) {
-                for (int i = 0; i < 30; i++) {
-                    EntityRef item = inventoryManager.getItemInSlot(entity, i);
-                    if (item.exists()) {
-                        inventoryManager.moveItem(entity,block2,i,block2,i,1);
-                        inventoryManager.removeItem(entity, block2, item, true);
-                    }
-                }
-            }
-        }else if(component3!=null){
-            if(block3.hasComponent(InventoryComponent.class)) {
-                for (int i = 0; i < 30; i++) {
-                    EntityRef item = inventoryManager.getItemInSlot(entity, i);
-                    if (item.exists()) {
-                        inventoryManager.moveItem(entity,block3,i,block3,i,1);
-                        inventoryManager.removeItem(entity, block3, item, true);
-                    }
-                }
-            }
-        }else if(component4!=null) {
-            if (block4.hasComponent(InventoryComponent.class)) {
-                for (int i = 0; i < 30; i++) {
-                    EntityRef item = inventoryManager.getItemInSlot(entity, i);
-                    if (item.exists()) {
-                        inventoryManager.moveItem(entity,block4,i,block4,i,1);
-                        inventoryManager.removeItem(entity, block4, item, true);
+            CollectingBlockComponent component = block.getComponent(CollectingBlockComponent.class);
+
+            if(component!=null){
+                if(block.hasComponent(InventoryComponent.class)){
+                    for (int i = 0; i < 30; i++) {
+                        EntityRef item = inventoryManager.getItemInSlot(entity, i);
+                        if(item.exists()){
+                            inventoryManager.moveItem(entity,block,i,block,i,1);
+                            inventoryManager.removeItem(entity,block,item,true);
+                        }
                     }
                 }
             }
