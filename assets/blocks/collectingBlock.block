@@ -1,0 +1,11 @@
+{
+    "displayName": "CollectingBlock",
+    "tile" : "AdditionalRails:Red",
+    "entity": {
+        "prefab": "collectingBlock"
+    },
+    "inventory": {
+        "stackable": false,
+        "directPickup": true
+    }
+}
