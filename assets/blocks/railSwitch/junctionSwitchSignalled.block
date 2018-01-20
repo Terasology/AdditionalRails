@@ -1,0 +1,18 @@
+{
+    "DisplayName": "Signal-controlled Junction Switch",
+    "entity": {
+        "prefab": "junctionSwitchSignalled"
+    },
+    "rotation": "twoState",
+
+    "false": {
+        "tiles": {
+            "all": "junctionSwitchSignalledOff"
+        }
+    },
+    "true": {
+        "tiles": {
+            "all": "junctionSwitchSignalledOn"
+        }
+    }
+}

@@ -3,8 +3,8 @@
         "connectionSides": 63
     },
     "Signalling:SignalConsumerStatus": {
-        "hasSignal": true
+        "hasSignal": false
     },
-    "AdditionalRails:RailSwitchSignal": {
+    "AdditionalRails:JunctionSwitchSignalled": {
     }
 }

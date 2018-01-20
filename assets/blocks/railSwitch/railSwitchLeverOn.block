@@ -1,8 +1,0 @@
-{
-    "entity": {
-        "prefab": "AdditionalRails:railSwitchLeverOn"
-    },
-    "inventory": {
-        "pickupFamily": "AdditionalRails:railSwitchLeverOff"
-    }
-}

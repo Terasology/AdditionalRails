@@ -1,0 +1,18 @@
+{
+    "DisplayName": "Junction Switch",
+    "entity": {
+        "prefab": "junctionSwitch"
+    },
+    "rotation": "twoState",
+
+    "false": {
+        "tiles": {
+            "all": "junctionSwitchOff"
+        }
+    },
+    "true": {
+        "tiles": {
+            "all": "junctionSwitchOn"
+        }
+    }
+}

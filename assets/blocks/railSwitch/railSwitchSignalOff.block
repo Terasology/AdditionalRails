@@ -1,6 +1,0 @@
-{
-    "entity": {
-        "prefab": "AdditionalRails:railSwitchSignalOff"
-    },
-    "DisplayName": "Signal Switch"
-}
