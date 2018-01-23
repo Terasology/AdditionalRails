@@ -1,13 +1,13 @@
 {
     "id" : "AdditionalRails",
-    "version" : "0.0.2-SNAPSHOT",
+    "version" : "0.0.3-SNAPSHOT",
     "author" : "",
     "displayName" : "Additional Rails",
     "description" : "Adds additional rails to Terasology",
     "dependencies" : [
         {
             "id": "Rails",
-            "minVersion": "0.3.7-SNAPSHOT"
+            "minVersion": "0.3.8-SNAPSHOT"
         },
         {
             "id": "Core",

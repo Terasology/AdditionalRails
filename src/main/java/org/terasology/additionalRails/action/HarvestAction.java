@@ -61,12 +61,12 @@ public class HarvestAction extends BaseComponentSystem{
         BushDefinitionComponent component2 = block2.getComponent(BushDefinitionComponent.class);
 
         if(component1!=null){
-            if(component1.currentStage == component1.stages.length - 1){
+            if(component1.currentStage == component1.growthStages.size() - 1){
                 entity.send(new ActivateEvent(block1, entity, null, null, null, null, 0));
             }
         }
         if(component2!=null){
-            if(component2.currentStage == component2.stages.length - 1){
+            if(component2.currentStage == component2.growthStages.size() - 1){
                 entity.send(new ActivateEvent(block2, entity, null, null, null, null, 0));
             }
         }
