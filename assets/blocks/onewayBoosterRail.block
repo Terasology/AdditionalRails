@@ -1,7 +1,7 @@
 {
     "shadowCasting": "false",
     "translucent" : true,
-    "rotation": "Rails:rails",
+    "family": "Rails:rails",
     "penetrable" : false,
 
     "no_connections": {
