@@ -23,7 +23,7 @@ import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.common.ActivateEvent;
 import org.terasology.math.geom.Vector3i;
-import org.terasology.minecarts.blocks.RailsUpdateFamily;
+import org.terasology.minecarts.blocks.RailBlockFamily;
 import org.terasology.minecarts.components.WrenchComponent;
 import org.terasology.registry.In;
 import org.terasology.world.BlockEntityRegistry;
@@ -47,13 +47,14 @@ public class WrenchOnewayAction extends BaseComponentSystem {
     @ReceiveEvent(components = {WrenchComponent.class})
     public void onRailFlipAction(ActivateEvent event, EntityRef item) {
         EntityRef targetEntity = event.getTarget();
-        if (!targetEntity.hasComponent(OnewayBoosterRailComponent.class))
+        if (!targetEntity.hasComponent(OnewayBoosterRailComponent.class)) {
             return;
+        }
 
         Vector3i position = targetEntity.getComponent(BlockComponent.class).getPosition();
 
-        RailsUpdateFamily originalFamily = (RailsUpdateFamily) blockManager.getBlockFamily("AdditionalRails:OnewayBoosterRail");
-        RailsUpdateFamily invertedFamily = (RailsUpdateFamily) blockManager.getBlockFamily("AdditionalRails:OnewayBoosterRailInverted");
+        RailBlockFamily originalFamily = (RailBlockFamily) blockManager.getBlockFamily("AdditionalRails:OnewayBoosterRail");
+        RailBlockFamily invertedFamily = (RailBlockFamily) blockManager.getBlockFamily("AdditionalRails:OnewayBoosterRailInverted");
 
         //Using the Block from BlockComponents directly causes rails to return to their original orientation when their orientation was changed because of being connected to a T or intersection.
         Block block = worldProvider.getBlock(targetEntity.getComponent(BlockComponent.class).getPosition());
@@ -62,8 +63,7 @@ public class WrenchOnewayAction extends BaseComponentSystem {
 
         if (block.getBlockFamily() == originalFamily) {
             blockEntityRegistry.setBlockForceUpdateEntity(position, invertedFamily.getBlockByConnection(connections));
-        }
-        else if(block.getBlockFamily() == invertedFamily) {
+        } else if (block.getBlockFamily() == invertedFamily) {
             blockEntityRegistry.setBlockForceUpdateEntity(position, originalFamily.getBlockByConnection(connections));
         }
     }

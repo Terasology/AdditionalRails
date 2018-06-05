@@ -1,12 +1,23 @@
+/*
+ * Copyright 2018 MovingBlocks
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.terasology.additionalRails.action;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.terasology.additionalRails.components.TrackLayerCartComponent;
-import org.terasology.entitySystem.Component;
 import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.entitySystem.entity.EntityRef;
-import org.terasology.entitySystem.prefab.Prefab;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
@@ -17,7 +28,7 @@ import org.terasology.math.Side;
 import org.terasology.math.SideBitFlag;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.minecarts.blocks.RailComponent;
-import org.terasology.minecarts.blocks.RailsUpdateFamily;
+import org.terasology.minecarts.blocks.RailBlockFamily;
 import org.terasology.minecarts.components.RailVehicleComponent;
 import org.terasology.registry.In;
 import org.terasology.segmentedpaths.components.PathFollowerComponent;
@@ -32,7 +43,6 @@ import java.util.List;
 
 /**
  * System covering Track Layer Cart's behavior.
- * @author anuar2k
  */
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class TrackLayerCartAction extends BaseComponentSystem implements UpdateSubscriberSystem {
@@ -69,7 +79,7 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
                 continue;
             }
 
-            RailsUpdateFamily ruFamily = (RailsUpdateFamily)rBlock.getBlockFamily();
+            RailBlockFamily ruFamily = (RailBlockFamily) rBlock.getBlockFamily();
             //The block we are going to place is the same our cart is currently on, so we can generate it based on the same connection flags.
             rBlock = ruFamily.getBlockByConnection(connections);
             //The location of new rail block is opposite to rail's current connection, so we reverse the side and add its vector to get the location of new rail block we're going to place.
@@ -124,5 +134,4 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
             }
         }
     }
-
 }

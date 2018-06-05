@@ -1,3 +1,18 @@
+/*
+ * Copyright 2018 MovingBlocks
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.terasology.additionalRails.action;
 
 import org.terasology.additionalRails.components.TunnelBoreCartComponent;
@@ -13,7 +28,7 @@ import org.terasology.math.Side;
 import org.terasology.math.SideBitFlag;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.minecarts.blocks.RailComponent;
-import org.terasology.minecarts.blocks.RailsUpdateFamily;
+import org.terasology.minecarts.blocks.RailBlockFamily;
 import org.terasology.minecarts.components.RailVehicleComponent;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.registry.In;
@@ -62,11 +77,11 @@ public class TunnelBoreCartAction extends BaseComponentSystem implements UpdateS
                 continue;
             }
 
-            RailsUpdateFamily ruFamily = (RailsUpdateFamily)rBlock.getBlockFamily();
+            RailBlockFamily ruFamily = (RailBlockFamily) rBlock.getBlockFamily();
             rBlock = ruFamily.getBlockByConnection(connections);
             side = side.reverse();
             Vector3i nextBlock = rbLocation.add(side.getVector3i());
-            Vector3i digCenter = new Vector3i(nextBlock.x, nextBlock.y+1, nextBlock.z);
+            Vector3i digCenter = new Vector3i(nextBlock.x, nextBlock.y + 1, nextBlock.z);
             
             Vector3i right = side.yawClockwise(1).getVector3i();
             Vector3i left = side.yawClockwise(3).getVector3i();
@@ -76,13 +91,14 @@ public class TunnelBoreCartAction extends BaseComponentSystem implements UpdateS
             worldProvider.setBlock(digCenter.add(right), air);
             worldProvider.setBlock(digCenter.add(Vector3i.down()), air);
             worldProvider.setBlock(digCenter.add(Vector3i.down()), air);
-            if(!worldProvider.getBlock(digCenter.add(left)).getBlockFamily().equals(ruFamily))
+            if (!worldProvider.getBlock(digCenter.add(left)).getBlockFamily().equals(ruFamily)) {
                 worldProvider.setBlock(digCenter, air);
+            }
             worldProvider.setBlock(digCenter.add(left), air);
             worldProvider.setBlock(digCenter.add(Vector3i.up()), air);
             worldProvider.setBlock(digCenter.add(Vector3i.up()), air);
 
-            if(worldProvider.getBlock(nextBlock).getBlockFamily().equals(ruFamily)) {
+            if (worldProvider.getBlock(nextBlock).getBlockFamily().equals(ruFamily)) {
                 continue;
             }
             
@@ -116,5 +132,4 @@ public class TunnelBoreCartAction extends BaseComponentSystem implements UpdateS
             }
         }
     }
-
 }
