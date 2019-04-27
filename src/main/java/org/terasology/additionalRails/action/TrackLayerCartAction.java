@@ -16,15 +16,13 @@
 package org.terasology.additionalRails.action;
 
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.terasology.additionalRails.components.TrackLayerCartComponent;
+import org.terasology.additionalRails.events.LayTrackEvent;
 import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.entitySystem.entity.EntityRef;
+import org.terasology.entitySystem.event.ReceiveEvent;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
@@ -32,7 +30,6 @@ import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
 import org.terasology.logic.inventory.InventoryComponent;
 import org.terasology.logic.inventory.ItemComponent;
 import org.terasology.math.Side;
-import org.terasology.math.SideBitFlag;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.minecarts.blocks.RailBlockFamily;
 import org.terasology.minecarts.blocks.RailComponent;
@@ -45,15 +42,11 @@ import org.terasology.world.block.BlockComponent;
 import org.terasology.world.block.BlockManager;
 import org.terasology.world.block.items.BlockItemComponent;
 
-import com.google.common.collect.Sets;
-
 /**
  * System covering Track Layer Cart's behavior.
  */
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class TrackLayerCartAction extends BaseComponentSystem implements UpdateSubscriberSystem {
-	Logger LOGGER = LoggerFactory.getLogger(TrackLayerCartAction.class);
-
     @In
     EntityManager entityManager;
     @In
@@ -74,12 +67,12 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
             BlockComponent bComp = rbEntity.getComponent(BlockComponent.class);
             Vector3i rbLocation = new Vector3i(bComp.position);
             Block rBlock = bComp.block;
-            
+
             Vector3i heading = new Vector3i(pfComp.heading, RoundingMode.CEILING);
-            
+
             //Only work with straight tracks
             if (heading.getX() != 0 && heading.getY() != 0) {
-            	continue;
+                continue;
             }
 
             Side side = Side.inDirection(heading.getX(), 0, heading.getZ());
@@ -87,16 +80,20 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
             RailBlockFamily ruFamily = (RailBlockFamily) rBlock.getBlockFamily();
             Vector3i newRailLocation = new Vector3i(rbLocation).add(side.getVector3i());
             rBlock = ruFamily.getBlockForPlacement(newRailLocation, null, null);
-            layTrack(entity, ruFamily, newRailLocation);
+            entity.send(new LayTrackEvent(ruFamily, newRailLocation));
             side = side.reverse();
             newRailLocation = new Vector3i(rbLocation).add(side.getVector3i());
             rBlock = ruFamily.getBlockForPlacement(newRailLocation, null, null);
-            layTrack(entity, ruFamily, newRailLocation);
+            entity.send(new LayTrackEvent(ruFamily, newRailLocation));
         }
     }
-    
-    public void layTrack(EntityRef cart, RailBlockFamily ruFamily, Vector3i newRailLocation) {
-    	Block rBlock = ruFamily.getBlockForPlacement(newRailLocation, null, null);
+
+    @ReceiveEvent
+    public void onLayTrack(LayTrackEvent event, EntityRef cart, TrackLayerCartComponent comp) {
+        RailBlockFamily ruFamily = event.ruFamily;
+        Vector3i newRailLocation = event.newRailLocation;
+
+        Block rBlock = ruFamily.getBlockForPlacement(newRailLocation, null, null);
 
         //If the there is no space for new rail - go to another cart entity.
         Block nextBlock = worldProvider.getBlock(newRailLocation);
@@ -132,7 +129,7 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
             if (bitem.blockFamily.equals(ruFamily)) {
                 item.stackCount--;
                 gotItem = true;
-                //If the stack's count is equal or lower than zero, remove the stack from inventory.
+                //If the stack's count is equal or lower than zero, remove the stack from inventory. 
                 if (item.stackCount <= 0) {
                     iComponent.itemSlots.set(iComponent.itemSlots.indexOf(slot), EntityRef.NULL);
                 }
