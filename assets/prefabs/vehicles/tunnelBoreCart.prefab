@@ -35,6 +35,7 @@
          "destroyEntityOnNoHealth" : true
      },
      "AdditionalRails:TunnelBoreCart": {},
+     "AdditionalRails:TrackLayerCart": {},
      "Rails:RailVehicle": {},
      "Trigger": {
          "detectGroups": [
