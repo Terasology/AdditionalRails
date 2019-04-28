@@ -18,8 +18,6 @@ package org.terasology.additionalRails.action;
 import java.math.RoundingMode;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.terasology.additionalRails.components.TrackLayerCartComponent;
 import org.terasology.additionalRails.events.LayTrackEvent;
 import org.terasology.entitySystem.entity.EntityManager;
@@ -50,8 +48,6 @@ import org.terasology.world.block.items.BlockItemComponent;
  */
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class TrackLayerCartAction extends BaseComponentSystem implements UpdateSubscriberSystem {
-    Logger LOGGER = LoggerFactory.getLogger(TrackLayerCartAction.class);
-
     @In
     private EntityManager entityManager;
     @In
@@ -114,7 +110,6 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
         BlockFamily ruFamily = null;
         boolean gotItem = false;
         for (EntityRef slot : slots) {
-            LOGGER.info(slot.toFullDescription());
             //If it's not a rail block - go to next slot.
             if (slot == EntityRef.NULL) {
                 continue;
@@ -129,7 +124,6 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
             BlockItemComponent bitem = slot.getComponent(BlockItemComponent.class);
             //If the block item is a rail block...
             if (bitem.blockFamily instanceof RailBlockFamily) {
-                LOGGER.info("Found rail item");
                 ruFamily = bitem.blockFamily;
                 item.stackCount--;
                 gotItem = true;
@@ -143,7 +137,6 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
 
         //Place the new rail if it was available in the inventory.
         if (gotItem) {
-            LOGGER.info("Laying down track");
             Block rBlock = ruFamily.getBlockForPlacement(newRailLocation, null, null);
             worldProvider.setBlock(newRailLocation, rBlock);
         }
