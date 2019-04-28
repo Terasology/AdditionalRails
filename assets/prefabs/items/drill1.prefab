@@ -1,0 +1,13 @@
+{
+    "parent": "engine:iconItem",
+    "DisplayName": {
+        "name": "Wooden Drill Head"
+    },
+    "Item": {
+        "name": "Wooden Drill Head",
+        "icon": "AdditionalRails:minecart#drill1"
+    },
+    "AdditionalRails:BoreDrill": {
+        "damageType" : "AdditionalRails:drillDamage"
+    }
+}

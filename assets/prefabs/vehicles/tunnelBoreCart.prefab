@@ -48,7 +48,7 @@
      },
      "Inventory": {
          "privateToOwner": false,
-         "itemSlots": [0, 0, 0]
+         "itemSlots": [0, 0, 0, 0]
      },
      "InteractionTarget": {},
      "InteractionScreen": {
