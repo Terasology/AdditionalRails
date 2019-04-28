@@ -28,6 +28,21 @@
                      "position-bottom": {
                          "target": "TOP",
                          "widget": "inventory",
+                         "offset": 80
+                     },
+                     "position-horizontal-center": {}
+                 }
+             },
+             {
+                 "type": "InventoryGrid",
+                 "id": "drill",
+                 "maxHorizontalCells": 1,
+                 "layoutInfo": {
+                     "use-content-width": true,
+                     "use-content-height": true,
+                     "position-bottom": {
+                         "target": "TOP",
+                         "widget": "inventory",
                          "offset": 16
                      },
                      "position-horizontal-center": {}

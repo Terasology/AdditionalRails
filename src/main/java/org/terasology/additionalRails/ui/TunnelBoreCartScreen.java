@@ -14,6 +14,7 @@ public class TunnelBoreCartScreen extends CoreScreenLayer {
     private LocalPlayer localPlayer;
 
     private InventoryGrid containerInventory;
+    private InventoryGrid drillInventory;
 
     @Override
     public void initialise() {
@@ -35,6 +36,18 @@ public class TunnelBoreCartScreen extends CoreScreenLayer {
                 return characterComponent.predictedInteractionTarget;
             }
         });
+        containerInventory.setMaxCellCount(3);
+
+        drillInventory = find("drill", InventoryGrid.class);
+        drillInventory.bindTargetEntity(new ReadOnlyBinding<EntityRef>() {
+            @Override
+            public EntityRef get() {
+                EntityRef characterEntity = localPlayer.getCharacterEntity();
+                CharacterComponent characterComponent = characterEntity.getComponent(CharacterComponent.class);
+                return characterComponent.predictedInteractionTarget;
+            }
+        });
+        drillInventory.setCellOffset(3);
     }
 
     @Override
