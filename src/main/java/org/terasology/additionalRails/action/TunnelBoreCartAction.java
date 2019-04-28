@@ -35,6 +35,7 @@ import org.terasology.logic.inventory.InventoryComponent;
 import org.terasology.logic.inventory.events.BeforeItemPutInInventory;
 import org.terasology.math.Side;
 import org.terasology.math.geom.Vector3i;
+import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.registry.In;
 import org.terasology.segmentedpaths.components.PathFollowerComponent;
@@ -85,7 +86,7 @@ public class TunnelBoreCartAction extends BaseComponentSystem {
 
         Vector3i loc = excavate.get(rand.nextInt(excavate.size()));
         if(!worldProvider.getBlock(loc).equals(air) &&
-                !worldProvider.getBlock(loc).getBlockFamily().equals(event.ruFamily)) {
+                !blockEntityRegistry.getBlockEntityAt(loc).hasComponent(RailComponent.class)) {
             EntityRef blockEntity = blockEntityRegistry.getBlockEntityAt(loc);
             blockEntity.send(new DoDamageEvent(1, damageType, cart, boreDrill));
         }

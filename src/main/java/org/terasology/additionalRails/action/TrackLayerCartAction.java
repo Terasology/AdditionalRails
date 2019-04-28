@@ -18,6 +18,8 @@ package org.terasology.additionalRails.action;
 import java.math.RoundingMode;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.terasology.additionalRails.components.TrackLayerCartComponent;
 import org.terasology.additionalRails.events.LayTrackEvent;
 import org.terasology.entitySystem.entity.EntityManager;
@@ -40,6 +42,7 @@ import org.terasology.world.WorldProvider;
 import org.terasology.world.block.Block;
 import org.terasology.world.block.BlockComponent;
 import org.terasology.world.block.BlockManager;
+import org.terasology.world.block.family.BlockFamily;
 import org.terasology.world.block.items.BlockItemComponent;
 
 /**
@@ -47,10 +50,12 @@ import org.terasology.world.block.items.BlockItemComponent;
  */
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class TrackLayerCartAction extends BaseComponentSystem implements UpdateSubscriberSystem {
+    Logger LOGGER = LoggerFactory.getLogger(TrackLayerCartAction.class);
+
     @In
-    EntityManager entityManager;
+    private EntityManager entityManager;
     @In
-    WorldProvider worldProvider;
+    private WorldProvider worldProvider;
 
     @Override
     public void update(float delta) {
@@ -79,21 +84,16 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
 
             RailBlockFamily ruFamily = (RailBlockFamily) rBlock.getBlockFamily();
             Vector3i newRailLocation = new Vector3i(rbLocation).add(side.getVector3i());
-            rBlock = ruFamily.getBlockForPlacement(newRailLocation, null, null);
-            entity.send(new LayTrackEvent(ruFamily, newRailLocation));
+            entity.send(new LayTrackEvent(newRailLocation));
             side = side.reverse();
             newRailLocation = new Vector3i(rbLocation).add(side.getVector3i());
-            rBlock = ruFamily.getBlockForPlacement(newRailLocation, null, null);
-            entity.send(new LayTrackEvent(ruFamily, newRailLocation));
+            entity.send(new LayTrackEvent(newRailLocation));
         }
     }
 
     @ReceiveEvent
     public void onLayTrack(LayTrackEvent event, EntityRef cart, TrackLayerCartComponent comp) {
-        RailBlockFamily ruFamily = event.ruFamily;
         Vector3i newRailLocation = event.newRailLocation;
-
-        Block rBlock = ruFamily.getBlockForPlacement(newRailLocation, null, null);
 
         //If the there is no space for new rail - go to another cart entity.
         Block nextBlock = worldProvider.getBlock(newRailLocation);
@@ -111,8 +111,10 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
         InventoryComponent iComponent = cart.getComponent(InventoryComponent.class);
         List<EntityRef> slots = iComponent.itemSlots;
 
+        BlockFamily ruFamily = null;
         boolean gotItem = false;
         for (EntityRef slot : slots) {
+            LOGGER.info(slot.toFullDescription());
             //If it's not a rail block - go to next slot.
             if (slot == EntityRef.NULL) {
                 continue;
@@ -126,7 +128,9 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
             ItemComponent item = slot.getComponent(ItemComponent.class);
             BlockItemComponent bitem = slot.getComponent(BlockItemComponent.class);
             //If the block item is a rail block...
-            if (bitem.blockFamily.equals(ruFamily)) {
+            if (bitem.blockFamily instanceof RailBlockFamily) {
+                LOGGER.info("Found rail item");
+                ruFamily = bitem.blockFamily;
                 item.stackCount--;
                 gotItem = true;
                 //If the stack's count is equal or lower than zero, remove the stack from inventory. 
@@ -139,6 +143,8 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
 
         //Place the new rail if it was available in the inventory.
         if (gotItem) {
+            LOGGER.info("Laying down track");
+            Block rBlock = ruFamily.getBlockForPlacement(newRailLocation, null, null);
             worldProvider.setBlock(newRailLocation, rBlock);
         }
     }
