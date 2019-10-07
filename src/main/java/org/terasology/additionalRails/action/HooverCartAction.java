@@ -55,7 +55,7 @@ public class HooverCartAction extends BaseComponentSystem implements UpdateSubsc
                     ItemComponent itemComponent = fuelSlot.getComponent(ItemComponent.class);
                     BlockItemComponent biComponent = fuelSlot.getComponent(BlockItemComponent.class);
                     //add 5 energy units for 1 torch
-                    if (biComponent.blockFamily.getURI().toString().equalsIgnoreCase("core:torch")) {
+                    if (biComponent.blockFamily.getURI().toString().toLowerCase().endsWith("torch")) {
                         while (itemComponent.stackCount > 0) {
                             itemComponent.stackCount--;
                             hcComponent.energy += 5;
