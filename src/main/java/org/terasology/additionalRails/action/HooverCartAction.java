@@ -40,6 +40,10 @@ public class HooverCartAction extends BaseComponentSystem implements UpdateSubsc
     @In
     Physics physics;
 
+    private boolean isTorch(BlockItemComponent blockItem) {
+        return blockItem.blockFamily.getURI().toString().toLowerCase().endsWith("torch");
+    }
+
     @Override
     public void update(float delta) {
         for (EntityRef entity : entityManager.getEntitiesWith(HooverCartComponent.class, InventoryComponent.class, LocationComponent.class)) {
@@ -55,7 +59,7 @@ public class HooverCartAction extends BaseComponentSystem implements UpdateSubsc
                     ItemComponent itemComponent = fuelSlot.getComponent(ItemComponent.class);
                     BlockItemComponent biComponent = fuelSlot.getComponent(BlockItemComponent.class);
                     //add 5 energy units for 1 torch
-                    if (biComponent.blockFamily.getURI().toString().toLowerCase().endsWith("torch")) {
+                    if (isTorch(biComponent)) {
                         while (itemComponent.stackCount > 0) {
                             itemComponent.stackCount--;
                             hcComponent.energy += 5;
