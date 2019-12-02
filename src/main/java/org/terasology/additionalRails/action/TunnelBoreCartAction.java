@@ -30,7 +30,7 @@ import org.terasology.entitySystem.prefab.Prefab;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
-import org.terasology.logic.health.DoDamageEvent;
+import org.terasology.logic.health.event.DoDamageEvent;
 import org.terasology.logic.inventory.InventoryComponent;
 import org.terasology.logic.inventory.events.BeforeItemPutInInventory;
 import org.terasology.math.Side;
