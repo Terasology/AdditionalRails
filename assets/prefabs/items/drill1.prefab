@@ -5,7 +5,7 @@
     },
     "Item": {
         "name": "Wooden Drill Head",
-        "icon": "AdditionalRails:minecart#drill1"
+        "icon": "AdditionalRails:drill#drill1"
     },
     "AdditionalRails:BoreDrill": {
         "damageType" : "AdditionalRails:drillDamage"

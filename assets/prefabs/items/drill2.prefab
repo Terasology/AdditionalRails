@@ -5,7 +5,7 @@
     },
     "Item": {
         "name": "Stone Drill Head",
-        "icon": "AdditionalRails:minecart#drill2"
+        "icon": "AdditionalRails:drill#drill2"
     },
     "AdditionalRails:BoreDrill": {
         "damageType" : "AdditionalRails:drillTier2Damage"

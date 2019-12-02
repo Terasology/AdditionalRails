@@ -5,7 +5,7 @@
     },
     "Item": {
         "name": "Metal Drill Head",
-        "icon": "AdditionalRails:minecart#drill3"
+        "icon": "AdditionalRails:drill#drill3"
     },
     "AdditionalRails:BoreDrill": {
         "damageType" : "AdditionalRails:drillTier3Damage"
