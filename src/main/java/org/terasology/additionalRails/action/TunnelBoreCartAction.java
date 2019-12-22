@@ -61,7 +61,7 @@ public class TunnelBoreCartAction extends BaseComponentSystem {
     public void onLayTrack(LayTrackEvent event, EntityRef cart, TrackLayerCartComponent comp, TunnelBoreCartComponent boreComp) {
         Random rand = new FastRandom();
 
-	BlockManager blockManager = CoreRegistry.get(BlockManager.class);
+        BlockManager blockManager = CoreRegistry.get(BlockManager.class);
         Block air = blockManager.getBlock(BlockManager.AIR_ID);
 
         Vector3i cartLoc = cart.getComponent(PathFollowerComponent.class).segmentMeta.association.getComponent(BlockComponent.class).position;
