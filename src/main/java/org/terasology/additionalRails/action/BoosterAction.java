@@ -23,6 +23,7 @@ import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
+import org.terasology.math.JomlUtil;
 import org.terasology.math.geom.Vector3f;
 import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.minecarts.components.RailVehicleComponent;
@@ -61,8 +62,8 @@ public class BoosterAction extends BaseComponentSystem implements UpdateSubscrib
         {
             RailVehicleComponent railVehicleComponent = ref.getComponent(RailVehicleComponent.class);
             if(railVehicleComponent.velocity.lengthSquared() < 25f) {
-                Vector3f additionalVelocity = new Vector3f(railVehicleComponent.velocity).normalize().mul((20f / 2.0f) * delta);
-                railVehicleComponent.velocity.add(additionalVelocity);
+                Vector3f additionalVelocity = new Vector3f(JomlUtil.from(railVehicleComponent.velocity)).normalize().mul((20f / 2.0f) * delta);
+                railVehicleComponent.velocity.add(JomlUtil.from(additionalVelocity));
                 ref.saveComponent(railVehicleComponent);
             }
 

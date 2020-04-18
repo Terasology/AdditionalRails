@@ -11,33 +11,34 @@ import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
 import org.terasology.logic.inventory.InventoryComponent;
 import org.terasology.logic.inventory.ItemComponent;
 import org.terasology.logic.inventory.events.BeforeItemPutInInventory;
+import org.terasology.math.JomlUtil;
 import org.terasology.math.geom.Vector3f;
 import org.terasology.minecarts.components.RailVehicleComponent;
 import org.terasology.registry.In;
 
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class CargoCartAction extends BaseComponentSystem implements UpdateSubscriberSystem {
-    
+
     private static final int MAX_ITEMS = 2971;
-    
+
     @In
     private EntityManager entityManager;
-    
+
     @Override
     public void update(float delta) {
         for(EntityRef cargoCart : entityManager.getEntitiesWith(CargoCartComponent.class)) {
         	CargoCartComponent cargoComponent = cargoCart.getComponent(CargoCartComponent.class);
             RailVehicleComponent vehicleComponent = cargoCart.getComponent(RailVehicleComponent.class);
-            
+
             float mult = (MAX_ITEMS - cargoComponent.weight)/(float) MAX_ITEMS;
-            
-            Vector3f velocity = vehicleComponent.velocity;
+
+            Vector3f velocity = JomlUtil.from(vehicleComponent.velocity);
             velocity = velocity.mul(mult);
-            vehicleComponent.velocity = velocity;
+            vehicleComponent.velocity = JomlUtil.from(velocity);
             cargoCart.addOrSaveComponent(vehicleComponent);
         }
     }
-    
+
     @ReceiveEvent
     public void onItemAdded(BeforeItemPutInInventory event, EntityRef entity, InventoryComponent inventory, CargoCartComponent cargoComponent) {
     	cargoComponent.weight = 0;

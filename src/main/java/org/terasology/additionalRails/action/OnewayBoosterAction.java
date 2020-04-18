@@ -24,6 +24,7 @@ import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
+import org.terasology.math.JomlUtil;
 import org.terasology.math.Rotation;
 import org.terasology.math.Side;
 import org.terasology.math.geom.Vector3f;
@@ -95,7 +96,7 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
      * if it doesn't exceed {@link #VELOCITY_LENGTH_MAX} or the addition decreases it.*/
     private void push(EntityRef ref, Vector3f thisMuch) {
         RailVehicleComponent railVehicleComponent = ref.getComponent(RailVehicleComponent.class);
-        Vector3f velocity = railVehicleComponent.velocity;
+        Vector3f velocity = JomlUtil.from(railVehicleComponent.velocity);
         //Allow pushing if the velocity decreases after the operation or doesn't exceed the maximum.
         if (velocity.lengthSquared() < VELOCITY_LENGTH_MAX || new Vector3f(velocity).add(thisMuch).lengthSquared() <= VELOCITY_LENGTH_MAX) {
             velocity.add(thisMuch);
