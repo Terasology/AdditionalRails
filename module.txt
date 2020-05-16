@@ -5,6 +5,7 @@
     "displayName": "Additional Rails",
     "description": "This module adds assets and logic for rails",
     "dependencies": [
+        { "id": "Drops", "minVersion": "1.0.1" },
         { "id": "Explosives", "minVersion": "1.0.0" },
         { "id": "Inventory", "minVersion": "1.1.0" },
         { "id": "Rails", "minVersion": "0.4.0" },

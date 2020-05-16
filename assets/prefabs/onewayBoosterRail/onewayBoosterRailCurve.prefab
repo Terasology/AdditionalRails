@@ -4,7 +4,7 @@
     "descriptors" : ["SegmentedPaths:leftFrontPath"]
   },
   "AdditionalRails:OnewayBoosterRail": {},
-  "BlockDropGrammar" : {
+  "DropGrammar" : {
     "blockDrops": [
       "AdditionalRails:OnewayBoosterRail"
     ]
