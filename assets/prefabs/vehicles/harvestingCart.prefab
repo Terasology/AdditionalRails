@@ -93,6 +93,6 @@
      "RetainBlockInventory": {},
      "InteractionTarget": {},
      "InteractionScreen": {
-         "screen": "core:containerScreen"
+         "screen": "Inventory:containerScreen"
      }
 }
