@@ -7,8 +7,10 @@
     "dependencies": [
         { "id": "Drops", "minVersion": "1.0.1" },
         { "id": "Explosives", "minVersion": "1.0.0" },
+        { "id": "Health", "minVersion": "1.0.0" },
         { "id": "Inventory", "minVersion": "1.1.0" },
         { "id": "Rails", "minVersion": "1.0.0" },
+        { "id": "SegmentedPaths", "minVersion": "1.0.0" },
         { "id": "Signalling", "minVersion": "1.0.0" },
         { "id": "SimpleFarming", "minVersion":"2.1.0" }
     ],
