@@ -40,7 +40,8 @@ public class BoosterAction extends BaseComponentSystem implements UpdateSubscrib
 
     @In
     CartMotionSystem cartMotionSystem;
-    public BoosterAction(){
+
+    public BoosterAction() {
 
     }
 
@@ -57,10 +58,9 @@ public class BoosterAction extends BaseComponentSystem implements UpdateSubscrib
     @Override
     public void update(float delta) {
         segmentEntities.removeIf(entityRef -> !entityRef.exists() || !entityRef.hasComponent(RailVehicleComponent.class) || !entityRef.hasComponent(PathFollowerComponent.class));
-        for (EntityRef ref: segmentEntities)
-        {
+        for (EntityRef ref : segmentEntities) {
             RailVehicleComponent railVehicleComponent = ref.getComponent(RailVehicleComponent.class);
-            if(railVehicleComponent.velocity.lengthSquared() < 25f) {
+            if (railVehicleComponent.velocity.lengthSquared() < 25f) {
                 Vector3f additionalVelocity = new Vector3f(railVehicleComponent.velocity).normalize().mul((20f / 2.0f) * delta);
                 railVehicleComponent.velocity.add(additionalVelocity);
                 ref.saveComponent(railVehicleComponent);
