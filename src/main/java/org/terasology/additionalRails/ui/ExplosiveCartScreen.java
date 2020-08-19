@@ -1,10 +1,13 @@
+// Copyright 2020 The Terasology Foundation
+// SPDX-License-Identifier: Apache-2.0
+
 package org.terasology.additionalRails.ui;
 
 import org.terasology.additionalRails.components.ExplosiveCartComponent;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.rendering.nui.CoreScreenLayer;
-import org.terasology.rendering.nui.widgets.UIButton;
-import org.terasology.rendering.nui.widgets.UISlider;
+import org.terasology.nui.widgets.UIButton;
+import org.terasology.nui.widgets.UISlider;
 
 /**
  * Explosive Cart's fuse length configurator's backend.
