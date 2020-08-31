@@ -25,6 +25,7 @@ import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.inventory.InventoryManager;
 import org.terasology.math.Direction;
+import org.terasology.math.JomlUtil;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.registry.In;
 import org.terasology.segmentedpaths.components.PathFollowerComponent;
@@ -52,7 +53,7 @@ public class PlantAction extends BaseComponentSystem {
     @In
     private EntityManager entityManager;
 
-    public void planting(EntityRef entity, Vector3i vector){
+    public void planting(EntityRef entity, Vector3i vector) {
         for (int i = 0; i <= 30; i++) {
             EntityRef myseed = inventoryManager.getItemInSlot(entity, i);
             if (myseed.hasComponent(SeedDefinitionComponent.class)) {
@@ -77,7 +78,7 @@ public class PlantAction extends BaseComponentSystem {
         BlockComponent blockcomponent = entityref.getComponent(BlockComponent.class);
         Vector3i location = new Vector3i(blockcomponent.getPosition());
 
-        Direction direction = Direction.inDirection(pfComponent.heading);
+        Direction direction = Direction.inDirection(JomlUtil.from(pfComponent.heading));
         Vector3i leftVector = direction.toSide().yawClockwise(1).getVector3i();
         Vector3i rightVector = direction.toSide().yawClockwise(3).getVector3i();
 
@@ -92,14 +93,14 @@ public class PlantAction extends BaseComponentSystem {
         Block left = worldprovider.getBlock(leftPosition);
         Block right = worldprovider.getBlock(rightPosition);
 
-        if (leftdown!= airBlock) {
-            if(left == airBlock){
+        if (leftdown != airBlock) {
+            if (left == airBlock) {
                 planting(entity, leftPosition);
             }
 
         }
         if (rightdown != airBlock) {
-            if(right == airBlock){
+            if (right == airBlock) {
                 planting(entity, rightPosition);
             }
         }

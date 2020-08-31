@@ -16,6 +16,7 @@
 package org.terasology.additionalRails.action;
 
 import com.google.common.collect.Sets;
+import org.joml.Vector3f;
 import org.terasology.additionalRails.components.OnewayBoosterRailComponent;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.event.ReceiveEvent;
@@ -26,7 +27,6 @@ import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
 import org.terasology.math.Rotation;
 import org.terasology.math.Side;
-import org.terasology.math.geom.Vector3f;
 import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.minecarts.blocks.RailBlockFamily;
 import org.terasology.minecarts.components.RailVehicleComponent;
@@ -80,13 +80,13 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
             BlockMappingComponent blockMappingComponent = prefab.getComponent(BlockMappingComponent.class);
 
             if (blockMappingComponent.s1 == Side.TOP || blockMappingComponent.s2 == Side.TOP) {
-                railDirection.addY(1); //Every original slope rail points upward and inverted ones downward, so the y value will always be correct after inverting below.
+                railDirection.y += 1; //Every original slope rail points upward and inverted ones downward, so the y value will always be correct after inverting below.
             }
             if (family == blockManager.getBlockFamily("AdditionalRails:OnewayBoosterRailInverted")) {
-                railDirection.invert();
+                railDirection.mul(-1);
             }
             //On z-axis, the direction the tile images point to is the opposite of the real direction they send carts to.
-            railDirection.mulZ(-1);
+            railDirection.z = -1;
 
             push(rc.cart, railDirection.mul(PUSH_RATE * delta));
         }

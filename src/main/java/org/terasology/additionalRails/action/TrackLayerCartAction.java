@@ -15,9 +15,7 @@
  */
 package org.terasology.additionalRails.action;
 
-import java.math.RoundingMode;
-import java.util.List;
-
+import org.joml.Vector3i;
 import org.terasology.additionalRails.components.TrackLayerCartComponent;
 import org.terasology.additionalRails.events.LayTrackEvent;
 import org.terasology.entitySystem.entity.EntityManager;
@@ -29,8 +27,8 @@ import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
 import org.terasology.logic.inventory.InventoryComponent;
 import org.terasology.logic.inventory.ItemComponent;
+import org.terasology.math.JomlUtil;
 import org.terasology.math.Side;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.minecarts.blocks.RailBlockFamily;
 import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.minecarts.components.RailVehicleComponent;
@@ -41,7 +39,10 @@ import org.terasology.world.block.Block;
 import org.terasology.world.block.BlockComponent;
 import org.terasology.world.block.BlockManager;
 import org.terasology.world.block.family.BlockFamily;
+import org.terasology.world.block.family.BlockPlacementData;
 import org.terasology.world.block.items.BlockItemComponent;
+
+import java.util.List;
 
 /**
  * System covering Track Layer Cart's behavior.
@@ -66,23 +67,23 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
             }
 
             BlockComponent bComp = rbEntity.getComponent(BlockComponent.class);
-            Vector3i rbLocation = new Vector3i(bComp.position);
+            Vector3i rbLocation = new Vector3i(JomlUtil.from(bComp.position));
             Block rBlock = bComp.block;
 
-            Vector3i heading = new Vector3i(pfComp.heading, RoundingMode.CEILING);
+            Vector3i heading = new Vector3i(pfComp.heading, org.joml.RoundingMode.CEILING);
 
             //Only work with straight tracks
-            if (heading.getX() != 0 && heading.getY() != 0) {
+            if (heading.x() != 0 && heading.y() != 0) {
                 continue;
             }
 
-            Side side = Side.inDirection(heading.getX(), 0, heading.getZ());
+            Side side = Side.inDirection(heading.x(), 0, heading.z());
 
             RailBlockFamily ruFamily = (RailBlockFamily) rBlock.getBlockFamily();
-            Vector3i newRailLocation = new Vector3i(rbLocation).add(side.getVector3i());
+            Vector3i newRailLocation = new Vector3i(rbLocation).add(side.direction());
             entity.send(new LayTrackEvent(newRailLocation));
             side = side.reverse();
-            newRailLocation = new Vector3i(rbLocation).add(side.getVector3i());
+            newRailLocation = new Vector3i(rbLocation).add(side.direction());
             entity.send(new LayTrackEvent(newRailLocation));
         }
     }
@@ -98,7 +99,7 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
         }
 
         //We have to do the same if there is no block on which rail would lay on.
-        Block underNextBlock = worldProvider.getBlock(new Vector3i(newRailLocation).add(Vector3i.down()));
+        Block underNextBlock = worldProvider.getBlock(new Vector3i(newRailLocation).add(new Vector3i(0, -1, 0)));
         if (underNextBlock.isPenetrable() || underNextBlock.isLiquid()) {
             return;
         }
@@ -127,7 +128,7 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
                 ruFamily = bitem.blockFamily;
                 item.stackCount--;
                 gotItem = true;
-                //If the stack's count is equal or lower than zero, remove the stack from inventory. 
+                //If the stack's count is equal or lower than zero, remove the stack from inventory.
                 if (item.stackCount <= 0) {
                     iComponent.itemSlots.set(iComponent.itemSlots.indexOf(slot), EntityRef.NULL);
                 }
@@ -137,7 +138,7 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
 
         //Place the new rail if it was available in the inventory.
         if (gotItem) {
-            Block rBlock = ruFamily.getBlockForPlacement(newRailLocation, null, null);
+            Block rBlock = ruFamily.getBlockForPlacement(new BlockPlacementData(newRailLocation, null, null));
             worldProvider.setBlock(newRailLocation, rBlock);
         }
     }

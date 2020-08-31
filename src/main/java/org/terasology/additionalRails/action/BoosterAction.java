@@ -16,6 +16,7 @@
 package org.terasology.additionalRails.action;
 
 import com.google.common.collect.Sets;
+import org.joml.Vector3f;
 import org.terasology.additionalRails.components.BoosterRailComponent;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.event.ReceiveEvent;
@@ -23,7 +24,6 @@ import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
-import org.terasology.math.geom.Vector3f;
 import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.minecarts.components.RailVehicleComponent;
 import org.terasology.minecarts.controllers.CartMotionSystem;
@@ -40,7 +40,8 @@ public class BoosterAction extends BaseComponentSystem implements UpdateSubscrib
 
     @In
     CartMotionSystem cartMotionSystem;
-    public BoosterAction(){
+
+    public BoosterAction() {
 
     }
 
@@ -57,10 +58,9 @@ public class BoosterAction extends BaseComponentSystem implements UpdateSubscrib
     @Override
     public void update(float delta) {
         segmentEntities.removeIf(entityRef -> !entityRef.exists() || !entityRef.hasComponent(RailVehicleComponent.class) || !entityRef.hasComponent(PathFollowerComponent.class));
-        for (EntityRef ref: segmentEntities)
-        {
+        for (EntityRef ref : segmentEntities) {
             RailVehicleComponent railVehicleComponent = ref.getComponent(RailVehicleComponent.class);
-            if(railVehicleComponent.velocity.lengthSquared() < 25f) {
+            if (railVehicleComponent.velocity.lengthSquared() < 25f) {
                 Vector3f additionalVelocity = new Vector3f(railVehicleComponent.velocity).normalize().mul((20f / 2.0f) * delta);
                 railVehicleComponent.velocity.add(additionalVelocity);
                 ref.saveComponent(railVehicleComponent);
