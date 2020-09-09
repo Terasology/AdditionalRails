@@ -1,94 +1,97 @@
 {
-    "type": "AdditionalRails:ExplosiveCartScreen",
-    "skin": "engine:default",
-    "contents": {
-        "type": "relativeLayout",
-        "contents": [
+  "type": "AdditionalRails:ExplosiveCartScreen",
+  "skin": "engine:default",
+  "contents": {
+    "type": "relativeLayout",
+    "contents": [
+      {
+        "type": "UIBox",
+        "layoutInfo": {
+          "width": 300,
+          "height": 118,
+          "position-horizontal-center": {},
+          "position-vertical-center": {}
+        },
+        "content": {
+          "type": "relativeLayout",
+          "contents": [
             {
-                "type": "UIBox",
-                "layoutInfo": {
-                    "width": 300,
-                    "height": 118,
-                    "position-horizontal-center": {},
-                    "position-vertical-center": {}
-                },
-                "content": {
-                    "type": "relativeLayout",
-                    "contents": [
-                        {
-                            "type": "UILabel",
-                            "id": "screenNameLabel",
-                            "text": "Set fuse length (in seconds)",
-                            "layoutInfo": {
-                                "position-horizontal-center": {},
-                                "use-content-height": true
-                            }
-                        },
-                        {
-                            "type": "UISlider",
-                            "id": "fuseSlider",
-                            "layoutInfo": {
-                                "height": 50,
-                                "position-top": {
-                                    "widget": "screenNameLabel",
-                                    "target": "BOTTOM"
-                                }
-                            },
-                            "value": 4,
-                            "minimum": 0,
-                            "range": 8,
-                            "precision": 1
-                        },
-                        {
-                            "type": "UIButton",
-                            "id": "setBtn",
-                            "text": "Set",
-                            "layoutInfo": {
-                                "use-content-height": true,
-                                "width": 133,
-                                "position-top": {
-                                    "widget": "fuseSlider",
-                                    "target": "BOTTOM"
-                                }
-                            }
-                        },
-                        {
-                            "type": "UISpace",
-                            "id": "space",
-                            "size": [1, 1],
-                            "layoutInfo": {
-                                "use-content-height": true,
-                                "width": 9,
-                                "position-top": {
-                                    "widget": "fuseSlider",
-                                    "target": "BOTTOM"
-                                },
-                                "position-left": {
-                                    "widget": "setBtn",
-                                    "target": "RIGHT"
-                                }
-                            }
-                        },
-                        {
-                            "type": "UIButton",
-                            "id": "cancelBtn",
-                            "text": "Close",
-                            "layoutInfo": {
-                                "use-content-height": true,
-                                "width": 133,
-                                "position-top": {
-                                    "widget": "fuseSlider",
-                                    "target": "BOTTOM"
-                                },
-                                "position-left": {
-                                    "widget": "space",
-                                    "target": "RIGHT"
-                                }
-                            }
-                        }
-                    ]
+              "type": "UILabel",
+              "id": "screenNameLabel",
+              "text": "Set fuse length (in seconds)",
+              "layoutInfo": {
+                "position-horizontal-center": {},
+                "use-content-height": true
+              }
+            },
+            {
+              "type": "UISlider",
+              "id": "fuseSlider",
+              "layoutInfo": {
+                "height": 50,
+                "position-top": {
+                  "widget": "screenNameLabel",
+                  "target": "BOTTOM"
                 }
+              },
+              "value": 4,
+              "minimum": 0,
+              "range": 8,
+              "precision": 1
+            },
+            {
+              "type": "UIButton",
+              "id": "setBtn",
+              "text": "Set",
+              "layoutInfo": {
+                "use-content-height": true,
+                "width": 133,
+                "position-top": {
+                  "widget": "fuseSlider",
+                  "target": "BOTTOM"
+                }
+              }
+            },
+            {
+              "type": "UISpace",
+              "id": "space",
+              "size": [
+                1,
+                1
+              ],
+              "layoutInfo": {
+                "use-content-height": true,
+                "width": 9,
+                "position-top": {
+                  "widget": "fuseSlider",
+                  "target": "BOTTOM"
+                },
+                "position-left": {
+                  "widget": "setBtn",
+                  "target": "RIGHT"
+                }
+              }
+            },
+            {
+              "type": "UIButton",
+              "id": "cancelBtn",
+              "text": "Close",
+              "layoutInfo": {
+                "use-content-height": true,
+                "width": 133,
+                "position-top": {
+                  "widget": "fuseSlider",
+                  "target": "BOTTOM"
+                },
+                "position-left": {
+                  "widget": "space",
+                  "target": "RIGHT"
+                }
+              }
             }
-        ]
-    }
+          ]
+        }
+      }
+    ]
+  }
 }

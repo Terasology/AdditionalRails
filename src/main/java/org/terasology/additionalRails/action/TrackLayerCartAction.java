@@ -1,47 +1,34 @@
-/*
- * Copyright 2018 MovingBlocks
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2020 The Terasology Foundation
+// SPDX-License-Identifier: Apache-2.0
 package org.terasology.additionalRails.action;
-
-import java.math.RoundingMode;
-import java.util.List;
 
 import org.terasology.additionalRails.components.TrackLayerCartComponent;
 import org.terasology.additionalRails.events.LayTrackEvent;
-import org.terasology.entitySystem.entity.EntityManager;
-import org.terasology.entitySystem.entity.EntityRef;
-import org.terasology.entitySystem.event.ReceiveEvent;
-import org.terasology.entitySystem.systems.BaseComponentSystem;
-import org.terasology.entitySystem.systems.RegisterMode;
-import org.terasology.entitySystem.systems.RegisterSystem;
-import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
-import org.terasology.logic.inventory.InventoryComponent;
-import org.terasology.logic.inventory.ItemComponent;
-import org.terasology.math.Side;
+import org.terasology.engine.entitySystem.entity.EntityManager;
+import org.terasology.engine.entitySystem.entity.EntityRef;
+import org.terasology.engine.entitySystem.event.ReceiveEvent;
+import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
+import org.terasology.engine.entitySystem.systems.RegisterMode;
+import org.terasology.engine.entitySystem.systems.RegisterSystem;
+import org.terasology.engine.entitySystem.systems.UpdateSubscriberSystem;
+import org.terasology.engine.logic.inventory.ItemComponent;
+import org.terasology.engine.math.Side;
+import org.terasology.engine.registry.In;
+import org.terasology.engine.world.WorldProvider;
+import org.terasology.engine.world.block.Block;
+import org.terasology.engine.world.block.BlockComponent;
+import org.terasology.engine.world.block.BlockManager;
+import org.terasology.engine.world.block.family.BlockFamily;
+import org.terasology.engine.world.block.items.BlockItemComponent;
+import org.terasology.inventory.logic.InventoryComponent;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.minecarts.blocks.RailBlockFamily;
 import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.minecarts.components.RailVehicleComponent;
-import org.terasology.registry.In;
 import org.terasology.segmentedpaths.components.PathFollowerComponent;
-import org.terasology.world.WorldProvider;
-import org.terasology.world.block.Block;
-import org.terasology.world.block.BlockComponent;
-import org.terasology.world.block.BlockManager;
-import org.terasology.world.block.family.BlockFamily;
-import org.terasology.world.block.items.BlockItemComponent;
+
+import java.math.RoundingMode;
+import java.util.List;
 
 /**
  * System covering Track Layer Cart's behavior.
@@ -56,7 +43,8 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
     @Override
     public void update(float delta) {
         //Look for all Track Layer Carts.
-        for (EntityRef entity : entityManager.getEntitiesWith(TrackLayerCartComponent.class, RailVehicleComponent.class, PathFollowerComponent.class, InventoryComponent.class)) {
+        for (EntityRef entity : entityManager.getEntitiesWith(TrackLayerCartComponent.class,
+                RailVehicleComponent.class, PathFollowerComponent.class, InventoryComponent.class)) {
             //Get the rail block under the cart.
             PathFollowerComponent pfComp = entity.getComponent(PathFollowerComponent.class);
             EntityRef rbEntity = pfComp.segmentMeta.association;

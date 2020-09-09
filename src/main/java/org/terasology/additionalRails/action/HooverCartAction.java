@@ -1,24 +1,27 @@
+// Copyright 2020 The Terasology Foundation
+// SPDX-License-Identifier: Apache-2.0
+
 package org.terasology.additionalRails.action;
 
 import org.terasology.additionalRails.components.HooverCartComponent;
-import org.terasology.entitySystem.Component;
-import org.terasology.entitySystem.entity.EntityManager;
-import org.terasology.entitySystem.entity.EntityRef;
-import org.terasology.entitySystem.systems.BaseComponentSystem;
-import org.terasology.entitySystem.systems.RegisterMode;
-import org.terasology.entitySystem.systems.RegisterSystem;
-import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
-import org.terasology.logic.inventory.InventoryComponent;
-import org.terasology.logic.inventory.InventoryManager;
-import org.terasology.logic.inventory.ItemComponent;
-import org.terasology.logic.inventory.PickupComponent;
-import org.terasology.logic.location.LocationComponent;
-import org.terasology.math.AABB;
+import org.terasology.engine.entitySystem.Component;
+import org.terasology.engine.entitySystem.entity.EntityManager;
+import org.terasology.engine.entitySystem.entity.EntityRef;
+import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
+import org.terasology.engine.entitySystem.systems.RegisterMode;
+import org.terasology.engine.entitySystem.systems.RegisterSystem;
+import org.terasology.engine.entitySystem.systems.UpdateSubscriberSystem;
+import org.terasology.engine.logic.inventory.ItemComponent;
+import org.terasology.engine.logic.inventory.PickupComponent;
+import org.terasology.engine.logic.location.LocationComponent;
+import org.terasology.engine.math.AABB;
+import org.terasology.engine.physics.Physics;
+import org.terasology.engine.physics.StandardCollisionGroup;
+import org.terasology.engine.registry.In;
+import org.terasology.engine.world.block.items.BlockItemComponent;
+import org.terasology.inventory.logic.InventoryComponent;
+import org.terasology.inventory.logic.InventoryManager;
 import org.terasology.math.geom.Vector3f;
-import org.terasology.physics.Physics;
-import org.terasology.physics.StandardCollisionGroup;
-import org.terasology.registry.In;
-import org.terasology.world.block.items.BlockItemComponent;
 
 import java.util.Arrays;
 import java.util.List;
@@ -46,7 +49,8 @@ public class HooverCartAction extends BaseComponentSystem implements UpdateSubsc
 
     @Override
     public void update(float delta) {
-        for (EntityRef entity : entityManager.getEntitiesWith(HooverCartComponent.class, InventoryComponent.class, LocationComponent.class)) {
+        for (EntityRef entity : entityManager.getEntitiesWith(HooverCartComponent.class, InventoryComponent.class,
+                LocationComponent.class)) {
             HooverCartComponent hcComponent = entity.getComponent(HooverCartComponent.class);
 
             //we need to take a look at the first slot to check if there is any fuel for the cart
