@@ -60,7 +60,7 @@ public class PlantAction extends BaseComponentSystem {
                 SeedDefinitionComponent seedComponent = myseed.getComponent(SeedDefinitionComponent.class);
                 EntityRef seed = myseed;
                 EntityRef plantEntity = seedComponent.prefab == null ? seed : entityManager.create(seedComponent.prefab);
-                plantEntity.send(new OnSeedPlanted(vector));
+                plantEntity.send(new OnSeedPlanted(JomlUtil.from(vector)));
                 inventoryManager.removeItem(seed.getOwner(), seed, seed, true, 1);
                 break;
 
