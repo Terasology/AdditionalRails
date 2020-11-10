@@ -18,6 +18,8 @@ package org.terasology.additionalRails.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joml.Vector3i;
+import org.joml.Vector3ic;
 import org.terasology.additionalRails.components.BoreDrillComponent;
 import org.terasology.additionalRails.components.TrackLayerCartComponent;
 import org.terasology.additionalRails.components.TunnelBoreCartComponent;
@@ -33,8 +35,8 @@ import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.health.event.DoDamageEvent;
 import org.terasology.logic.inventory.InventoryComponent;
 import org.terasology.logic.inventory.events.BeforeItemPutInInventory;
+import org.terasology.math.JomlUtil;
 import org.terasology.math.Side;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.registry.In;
@@ -57,36 +59,35 @@ public class TunnelBoreCartAction extends BaseComponentSystem {
     @In
     private BlockEntityRegistry blockEntityRegistry;
 
-    @ReceiveEvent(priority=EventPriority.PRIORITY_HIGH)
+    @ReceiveEvent(priority = EventPriority.PRIORITY_HIGH)
     public void onLayTrack(LayTrackEvent event, EntityRef cart, TrackLayerCartComponent comp, TunnelBoreCartComponent boreComp) {
         Random rand = new FastRandom();
 
         BlockManager blockManager = CoreRegistry.get(BlockManager.class);
         Block air = blockManager.getBlock(BlockManager.AIR_ID);
 
-        Vector3i cartLoc = cart.getComponent(PathFollowerComponent.class).segmentMeta.association.getComponent(BlockComponent.class).position;
+        Vector3i cartLoc = JomlUtil.from(cart.getComponent(PathFollowerComponent.class).segmentMeta.association.getComponent(BlockComponent.class).position);
         Vector3i direction = new Vector3i(event.newRailLocation).sub(cartLoc);
-        Side facing = Side.inDirection(direction.getX(), 0, direction.getZ());
-        Vector3i perp = facing.yawClockwise(1).getVector3i();
+        Side facing = Side.inDirection(direction.x(), 0, direction.z());
+        Vector3ic perp = facing.yawClockwise(1).direction();
 
         List<Vector3i> excavate = new ArrayList<>();
         excavate.add(new Vector3i(event.newRailLocation));
         excavate.add(new Vector3i(event.newRailLocation).add(perp));
         excavate.add(new Vector3i(event.newRailLocation).sub(perp));
-        excavate.add(new Vector3i(event.newRailLocation).addY(1));
-        excavate.add(new Vector3i(event.newRailLocation).add(perp).addY(1));
-        excavate.add(new Vector3i(event.newRailLocation).sub(perp).addY(1));
-        excavate.add(new Vector3i(event.newRailLocation).addY(2));
-        excavate.add(new Vector3i(event.newRailLocation).add(perp).addY(2));
-        excavate.add(new Vector3i(event.newRailLocation).sub(perp).addY(2));
+        excavate.add(new Vector3i(event.newRailLocation).add(0, 1, 0));
+        excavate.add(new Vector3i(event.newRailLocation).add(perp).add(0, 1, 0));
+        excavate.add(new Vector3i(event.newRailLocation).sub(perp).add(0, 1, 0));
+        excavate.add(new Vector3i(event.newRailLocation).add(0, 2, 0));
+        excavate.add(new Vector3i(event.newRailLocation).add(perp).add(0, 2, 0));
+        excavate.add(new Vector3i(event.newRailLocation).sub(perp).add(0, 2, 0));
 
         EntityRef boreDrill = cart.getComponent(InventoryComponent.class).itemSlots.get(3);
-        Prefab damageType = boreDrill == EntityRef.NULL ? entityManager.create("engine:physicalDamage").getParentPrefab() :
-            boreDrill.getComponent(BoreDrillComponent.class).damageType;
+        Prefab damageType = boreDrill == EntityRef.NULL ? entityManager.create("engine:physicalDamage").getParentPrefab() : boreDrill.getComponent(BoreDrillComponent.class).damageType;
 
         Vector3i loc = excavate.get(rand.nextInt(excavate.size()));
-        if(!worldProvider.getBlock(loc).equals(air) &&
-                !blockEntityRegistry.getBlockEntityAt(loc).hasComponent(RailComponent.class)) {
+        if (!worldProvider.getBlock(loc).equals(air) &&
+            !blockEntityRegistry.getBlockEntityAt(loc).hasComponent(RailComponent.class)) {
             EntityRef blockEntity = blockEntityRegistry.getBlockEntityAt(loc);
             blockEntity.send(new DoDamageEvent(1, damageType, cart, boreDrill));
         }
@@ -94,7 +95,7 @@ public class TunnelBoreCartAction extends BaseComponentSystem {
 
     @ReceiveEvent
     public void onFilterDrill(BeforeItemPutInInventory event, EntityRef cart, TunnelBoreCartComponent comp) {
-        if(event.getSlot() == 3 && !event.getItem().hasComponent(BoreDrillComponent.class)) {
+        if (event.getSlot() == 3 && !event.getItem().hasComponent(BoreDrillComponent.class)) {
             event.consume();
         }
     }

@@ -15,6 +15,8 @@
  */
 package org.terasology.additionalRails.action;
 
+import org.joml.Vector3i;
+import org.joml.Vector3ic;
 import org.terasology.additionalRails.components.HarvestCartComponent;
 import org.terasology.additionalRails.events.CartActivatedEvent;
 import org.terasology.entitySystem.entity.EntityRef;
@@ -23,8 +25,8 @@ import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.common.ActivateEvent;
-import org.terasology.math.*;
-import org.terasology.math.geom.Vector3i;
+import org.terasology.math.Direction;
+import org.terasology.math.JomlUtil;
 import org.terasology.registry.In;
 import org.terasology.segmentedpaths.components.PathFollowerComponent;
 import org.terasology.simpleFarming.components.BushDefinitionComponent;
@@ -32,41 +34,41 @@ import org.terasology.world.BlockEntityRegistry;
 import org.terasology.world.block.BlockComponent;
 
 @RegisterSystem(RegisterMode.AUTHORITY)
-public class HarvestAction extends BaseComponentSystem{
+public class HarvestAction extends BaseComponentSystem {
     public int currentStage;
 
     @In
     private BlockEntityRegistry blockEntityRegistry;
 
-    @ReceiveEvent(components = {HarvestCartComponent.class})
+    @ReceiveEvent(components = HarvestCartComponent.class)
     public void cartActivatedEvent(CartActivatedEvent event, EntityRef entity) {
 
         PathFollowerComponent pfComponent = entity.getComponent(PathFollowerComponent.class);
         EntityRef entityref = pfComponent.segmentMeta.association;
 
         BlockComponent blockcomponent = entityref.getComponent(BlockComponent.class);
-        Vector3i location = new Vector3i(blockcomponent.getPosition());
+        Vector3i location = new Vector3i(JomlUtil.from(blockcomponent.position));
 
-        Direction direction = Direction.inDirection(pfComponent.heading);
-        Vector3i leftVector = direction.toSide().yawClockwise(1).getVector3i();
-        Vector3i rightVector = direction.toSide().yawClockwise(3).getVector3i();
+        Direction direction = Direction.inDirection(JomlUtil.from(pfComponent.heading));
+        Vector3ic leftVector = direction.toSide().yawClockwise(1).direction();
+        Vector3ic rightVector = direction.toSide().yawClockwise(3).direction();
 
         Vector3i leftPosition = new Vector3i(location).add(leftVector);
         Vector3i rightPosition = new Vector3i(location).add(rightVector);
 
-        EntityRef block1=blockEntityRegistry.getExistingEntityAt(leftPosition);
-        EntityRef block2=blockEntityRegistry.getExistingEntityAt(rightPosition);
+        EntityRef block1 = blockEntityRegistry.getExistingEntityAt(leftPosition);
+        EntityRef block2 = blockEntityRegistry.getExistingEntityAt(rightPosition);
 
         BushDefinitionComponent component1 = block1.getComponent(BushDefinitionComponent.class);
         BushDefinitionComponent component2 = block2.getComponent(BushDefinitionComponent.class);
 
-        if(component1!=null){
-            if(component1.currentStage == component1.growthStages.size() - 1){
+        if (component1 != null) {
+            if (component1.currentStage == component1.growthStages.size() - 1) {
                 entity.send(new ActivateEvent(block1, entity, null, null, null, null, 0));
             }
         }
-        if(component2!=null){
-            if(component2.currentStage == component2.growthStages.size() - 1){
+        if (component2 != null) {
+            if (component2.currentStage == component2.growthStages.size() - 1) {
                 entity.send(new ActivateEvent(block2, entity, null, null, null, null, 0));
             }
         }

@@ -1,7 +1,7 @@
 package org.terasology.additionalRails.events;
 
+import org.joml.Vector3i;
 import org.terasology.entitySystem.event.Event;
-import org.terasology.math.geom.Vector3i;
 
 public class LayTrackEvent implements Event {
     public Vector3i newRailLocation;

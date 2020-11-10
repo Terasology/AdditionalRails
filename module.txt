@@ -1,13 +1,19 @@
 {
-    "id" : "AdditionalRails",
-    "version" : "0.0.4-SNAPSHOT",
-    "author" : "",
-    "displayName" : "Additional Rails",
-    "description" : "Adds additional rails to Terasology",
-    "dependencies" : [
-        {"id": "Rails", "minVersion": "0.4.0"},
-        {"id": "Core", "minVersion": "3.0.0"},
-        {"id": "Signalling", "minVersion": "0.1.1"},
-        {"id": "SimpleFarming", "minVersion":"2.0.1"}
-    ]
+    "id": "AdditionalRails",
+    "version": "1.0.0",
+    "author": "The Terasology Foundation",
+    "displayName": "Additional Rails",
+    "description": "This module adds assets and logic for rails",
+    "dependencies": [
+        { "id": "Drops", "minVersion": "1.0.1" },
+        { "id": "Explosives", "minVersion": "1.0.0" },
+        { "id": "Health", "minVersion": "1.0.0" },
+        { "id": "Inventory", "minVersion": "1.1.0" },
+        { "id": "Rails", "minVersion": "1.0.0" },
+        { "id": "SegmentedPaths", "minVersion": "1.0.0" },
+        { "id": "Signalling", "minVersion": "1.0.0" },
+        { "id": "SimpleFarming", "minVersion":"2.1.0" }
+    ],
+    "isAsset": true,
+    "isLibrary": true
 }
