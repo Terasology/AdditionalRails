@@ -27,8 +27,8 @@ import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
 import org.terasology.math.Rotation;
 import org.terasology.math.Side;
-import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.minecarts.blocks.RailBlockFamily;
+import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.minecarts.components.RailVehicleComponent;
 import org.terasology.registry.In;
 import org.terasology.segmentedpaths.components.BlockMappingComponent;
@@ -47,14 +47,16 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
     private static final int PUSH_RATE = 20;
     private static final int VELOCITY_LENGTH_MAX = 25;
 
-    private Set<RailCart> entities = Sets.newHashSet(); //The set of all pairs of a tile of OnewayBoosterRail and a vehicle on it
+    private Set<RailCart> entities = Sets.newHashSet(); //The set of all pairs of a tile of OnewayBoosterRail and a
+    // vehicle on it
 
     @In
     private BlockManager blockManager; //For retrieving the block family
 
 
     @ReceiveEvent(components = {OnewayBoosterRailComponent.class, RailComponent.class})
-    public void onEnterBoosterSegment(OnVisitSegment event, EntityRef entity) { //entity is the rail and event.getSegmentEntity() the cart
+    public void onEnterBoosterSegment(OnVisitSegment event, EntityRef entity) { //entity is the rail and event
+        // .getSegmentEntity() the cart
         entities.add(new RailCart(entity, event.getPathFollowingEntity()));
     }
 
@@ -73,26 +75,32 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
             //Get the direction of the rail
             Rotation rotation = family.getRotationFor(block.getURI());
             float yaw = rotation.getYaw().getRadians();
-            Vector3f railDirection = new Vector3f((float) Math.cos(yaw), 0, (float) Math.sin(yaw)); //https://stackoverflow.com/a/1568687
+            Vector3f railDirection = new Vector3f((float) Math.cos(yaw), 0, (float) Math.sin(yaw)); //https
+            // ://stackoverflow.com/a/1568687
             //Modify the direction
             //Also boost y-axis if the rail is a slope.
             Prefab prefab = rc.cart.getComponent(PathFollowerComponent.class).segmentMeta.prefab;
             BlockMappingComponent blockMappingComponent = prefab.getComponent(BlockMappingComponent.class);
 
             if (blockMappingComponent.s1 == Side.TOP || blockMappingComponent.s2 == Side.TOP) {
-                railDirection.y += 1; //Every original slope rail points upward and inverted ones downward, so the y value will always be correct after inverting below.
+                railDirection.y += 1; //Every original slope rail points upward and inverted ones downward, so the y
+                // value will always be correct after inverting below.
             }
             if (family == blockManager.getBlockFamily("AdditionalRails:OnewayBoosterRailInverted")) {
                 railDirection.mul(-1);
             }
-            //On z-axis, the direction the tile images point to is the opposite of the real direction they send carts to.
+            //On z-axis, the direction the tile images point to is the opposite of the real direction they send carts
+            // to.
             railDirection.z = -1;
 
             push(rc.cart, railDirection.mul(PUSH_RATE * delta));
         }
     }
-    /**Adds {@code thisMuch} to the velocity of {@code ref}'s {@code RailVehicleComponent}
-     * if it doesn't exceed {@link #VELOCITY_LENGTH_MAX} or the addition decreases it.*/
+
+    /**
+     * Adds {@code thisMuch} to the velocity of {@code ref}'s {@code RailVehicleComponent} if it doesn't exceed {@link
+     * #VELOCITY_LENGTH_MAX} or the addition decreases it.
+     */
     private void push(EntityRef ref, Vector3f thisMuch) {
         RailVehicleComponent railVehicleComponent = ref.getComponent(RailVehicleComponent.class);
         Vector3f velocity = railVehicleComponent.velocity;
@@ -102,13 +110,16 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
             ref.saveComponent(railVehicleComponent);
         }
     }
+
     private class RailCart {
         EntityRef rail;
         EntityRef cart;
+
         RailCart(EntityRef rail, EntityRef cart) {
             this.rail = rail;
             this.cart = cart;
         }
+
         @Override
         public boolean equals(Object obj) {
             if (obj instanceof RailCart) {
@@ -117,6 +128,7 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
             }
             return false;
         }
+
         @Override
         public int hashCode() {
             return Objects.hash(rail, cart);

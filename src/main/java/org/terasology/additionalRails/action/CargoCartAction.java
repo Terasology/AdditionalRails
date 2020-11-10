@@ -39,7 +39,8 @@ public class CargoCartAction extends BaseComponentSystem implements UpdateSubscr
     }
 
     @ReceiveEvent
-    public void onItemAdded(BeforeItemPutInInventory event, EntityRef entity, InventoryComponent inventory, CargoCartComponent cargoComponent) {
+    public void onItemAdded(BeforeItemPutInInventory event, EntityRef entity, InventoryComponent inventory,
+                            CargoCartComponent cargoComponent) {
         cargoComponent.weight = 0;
         for (EntityRef item : inventory.itemSlots) {
             if (item == EntityRef.NULL) {
