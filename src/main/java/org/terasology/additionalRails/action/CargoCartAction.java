@@ -33,13 +33,14 @@ public class CargoCartAction extends BaseComponentSystem implements UpdateSubscr
 
             Vector3f velocity = vehicleComponent.velocity;
             velocity = velocity.mul(mult);
-            vehicleComponent.velocity = JomlUtil.from(velocity);
+            vehicleComponent.velocity = velocity;
             cargoCart.addOrSaveComponent(vehicleComponent);
         }
     }
 
     @ReceiveEvent
-    public void onItemAdded(BeforeItemPutInInventory event, EntityRef entity, InventoryComponent inventory, CargoCartComponent cargoComponent) {
+    public void onItemAdded(BeforeItemPutInInventory event, EntityRef entity, InventoryComponent inventory,
+                            CargoCartComponent cargoComponent) {
         cargoComponent.weight = 0;
         for (EntityRef item : inventory.itemSlots) {
             if (item == EntityRef.NULL) {
