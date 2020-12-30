@@ -1,19 +1,43 @@
 {
-    "id": "AdditionalRails",
-    "version": "1.0.0",
-    "author": "The Terasology Foundation",
-    "displayName": "Additional Rails",
-    "description": "This module adds assets and logic for rails",
-    "dependencies": [
-        { "id": "Drops", "minVersion": "1.0.1" },
-        { "id": "Explosives", "minVersion": "1.0.0" },
-        { "id": "Health", "minVersion": "1.0.0" },
-        { "id": "Inventory", "minVersion": "1.1.0" },
-        { "id": "Rails", "minVersion": "1.0.0" },
-        { "id": "SegmentedPaths", "minVersion": "1.0.0" },
-        { "id": "Signalling", "minVersion": "1.0.0" },
-        { "id": "SimpleFarming", "minVersion":"2.1.0" }
-    ],
-    "isAsset": true,
-    "isLibrary": true
+  "id": "AdditionalRails",
+  "version": "1.1.0-SNAPSHOT",
+  "author": "The Terasology Foundation",
+  "displayName": "Additional Rails",
+  "description": "This module adds assets and logic for rails",
+  "dependencies": [
+    {
+      "id": "Drops",
+      "minVersion": "1.0.1"
+    },
+    {
+      "id": "Explosives",
+      "minVersion": "1.0.0"
+    },
+    {
+      "id": "Health",
+      "minVersion": "1.0.0"
+    },
+    {
+      "id": "Inventory",
+      "minVersion": "1.1.0"
+    },
+    {
+      "id": "Rails",
+      "minVersion": "1.0.0"
+    },
+    {
+      "id": "SegmentedPaths",
+      "minVersion": "1.0.0"
+    },
+    {
+      "id": "Signalling",
+      "minVersion": "1.0.0"
+    },
+    {
+      "id": "SimpleFarming",
+      "minVersion": "2.1.0"
+    }
+  ],
+  "isAsset": true,
+  "isLibrary": true
 }
