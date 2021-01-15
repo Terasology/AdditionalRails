@@ -15,6 +15,7 @@
  */
 package org.terasology.additionalRails.action;
 
+import org.joml.Vector3i;
 import org.terasology.additionalRails.components.RailSwitchLeverComponent;
 import org.terasology.additionalRails.components.RailSwitchSignalComponent;
 import org.terasology.entitySystem.entity.EntityRef;
@@ -25,15 +26,14 @@ import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.common.ActivateEvent;
 import org.terasology.math.SideBitFlag;
-import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.minecarts.blocks.RailBlockFamily;
+import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.registry.In;
 import org.terasology.signalling.components.SignalConsumerStatusComponent;
 import org.terasology.world.BlockEntityRegistry;
 import org.terasology.world.WorldProvider;
 import org.terasology.world.block.Block;
 import org.terasology.world.block.BlockComponent;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.world.block.BlockManager;
 
 /**
@@ -80,7 +80,7 @@ public class RailSwitchAction extends BaseComponentSystem {
      */
     @ReceiveEvent(components = {BlockComponent.class, RailSwitchLeverComponent.class})
     public void railSwitchLeverAction(ActivateEvent event, EntityRef entity, BlockComponent blockComponent, RailSwitchLeverComponent rslComponent) {
-        Vector3i blockLocation = new Vector3i(blockComponent.getPosition());
+        Vector3i blockLocation = blockComponent.getPosition(new Vector3i());
 
         //switch the block from on to off, from off to on; rslComponent.isOn is set in block prefab
         if (rslComponent.isOn) {
@@ -101,7 +101,7 @@ public class RailSwitchAction extends BaseComponentSystem {
      */
     @ReceiveEvent(components = {BlockComponent.class, RailSwitchSignalComponent.class, SignalConsumerStatusComponent.class})
     public void railSwitchSignalAction(OnChangedComponent event, EntityRef entity, BlockComponent blockComponent, SignalConsumerStatusComponent scsComponent) {
-        Vector3i blockLocation = new Vector3i(blockComponent.getPosition());
+        Vector3i blockLocation = blockComponent.getPosition(new Vector3i());
         Block block = worldProvider.getBlock(blockLocation);
 
         //switch the block from on to off, from off to on based on signal

@@ -15,6 +15,7 @@
  */
 package org.terasology.additionalRails.action;
 
+import org.joml.Vector3i;
 import org.terasology.additionalRails.components.OnewayBoosterRailComponent;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.event.ReceiveEvent;
@@ -22,7 +23,6 @@ import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.common.ActivateEvent;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.minecarts.blocks.RailBlockFamily;
 import org.terasology.minecarts.components.WrenchComponent;
 import org.terasology.registry.In;
@@ -51,7 +51,7 @@ public class WrenchOnewayAction extends BaseComponentSystem {
             return;
         }
 
-        Vector3i position = targetEntity.getComponent(BlockComponent.class).getPosition();
+        Vector3i position = targetEntity.getComponent(BlockComponent.class).getPosition(new Vector3i());
 
         RailBlockFamily originalFamily = (RailBlockFamily) blockManager.getBlockFamily("AdditionalRails:OnewayBoosterRail");
         RailBlockFamily invertedFamily = (RailBlockFamily) blockManager.getBlockFamily("AdditionalRails:OnewayBoosterRailInverted");
