@@ -15,6 +15,8 @@
  */
 package org.terasology.additionalRails.action;
 
+import org.joml.Vector3i;
+import org.joml.Vector3ic;
 import org.terasology.additionalRails.components.PlantCartComponent;
 import org.terasology.additionalRails.events.CartActivatedEvent;
 import org.terasology.entitySystem.entity.EntityManager;
@@ -25,8 +27,6 @@ import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.inventory.InventoryManager;
 import org.terasology.math.Direction;
-import org.terasology.math.JomlUtil;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.registry.In;
 import org.terasology.segmentedpaths.components.PathFollowerComponent;
 import org.terasology.simpleFarming.components.SeedDefinitionComponent;
@@ -53,14 +53,14 @@ public class PlantAction extends BaseComponentSystem {
     @In
     private EntityManager entityManager;
 
-    public void planting(EntityRef entity, Vector3i vector) {
+    public void planting(EntityRef entity, Vector3ic vector) {
         for (int i = 0; i <= 30; i++) {
             EntityRef myseed = inventoryManager.getItemInSlot(entity, i);
             if (myseed.hasComponent(SeedDefinitionComponent.class)) {
                 SeedDefinitionComponent seedComponent = myseed.getComponent(SeedDefinitionComponent.class);
                 EntityRef seed = myseed;
                 EntityRef plantEntity = seedComponent.prefab == null ? seed : entityManager.create(seedComponent.prefab);
-                plantEntity.send(new OnSeedPlanted(JomlUtil.from(vector)));
+                plantEntity.send(new OnSeedPlanted(vector));
                 inventoryManager.removeItem(seed.getOwner(), seed, seed, true, 1);
                 break;
 
@@ -76,17 +76,17 @@ public class PlantAction extends BaseComponentSystem {
         EntityRef entityref = pfComponent.segmentMeta.association;
 
         BlockComponent blockcomponent = entityref.getComponent(BlockComponent.class);
-        Vector3i location = new Vector3i(blockcomponent.getPosition());
+        Vector3i location = blockcomponent.getPosition(new Vector3i());
 
-        Direction direction = Direction.inDirection(JomlUtil.from(pfComponent.heading));
-        Vector3i leftVector = direction.toSide().yawClockwise(1).getVector3i();
-        Vector3i rightVector = direction.toSide().yawClockwise(3).getVector3i();
+        Direction direction = Direction.inDirection(pfComponent.heading);
+        Vector3ic leftVector = direction.toSide().yawClockwise(1).direction();
+        Vector3ic rightVector = direction.toSide().yawClockwise(3).direction();
 
         Vector3i leftPosition = new Vector3i(location).add(leftVector);
         Vector3i rightPosition = new Vector3i(location).add(rightVector);
 
-        Vector3i leftdownPosition = new Vector3i(leftPosition).add(Vector3i.down());
-        Vector3i rightdownPosition = new Vector3i(rightPosition).add(Vector3i.down());
+        Vector3i leftdownPosition = leftPosition.add(0, -1, 0, new Vector3i());
+        Vector3i rightdownPosition = rightPosition.add(0, -1, 0, new Vector3i());
 
         Block leftdown = worldprovider.getBlock(leftdownPosition);
         Block rightdown = worldprovider.getBlock(rightdownPosition);
