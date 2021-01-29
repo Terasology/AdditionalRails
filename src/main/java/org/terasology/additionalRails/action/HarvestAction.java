@@ -26,7 +26,6 @@ import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.common.ActivateEvent;
 import org.terasology.math.Direction;
-import org.terasology.math.JomlUtil;
 import org.terasology.registry.In;
 import org.terasology.segmentedpaths.components.PathFollowerComponent;
 import org.terasology.simpleFarming.components.BushDefinitionComponent;
@@ -47,9 +46,9 @@ public class HarvestAction extends BaseComponentSystem {
         EntityRef entityref = pfComponent.segmentMeta.association;
 
         BlockComponent blockcomponent = entityref.getComponent(BlockComponent.class);
-        Vector3i location = new Vector3i(JomlUtil.from(blockcomponent.position));
+        Vector3i location = new Vector3i(blockcomponent.getPosition(new Vector3i()));
 
-        Direction direction = Direction.inDirection(JomlUtil.from(pfComponent.heading));
+        Direction direction = Direction.inDirection(pfComponent.heading);
         Vector3ic leftVector = direction.toSide().yawClockwise(1).direction();
         Vector3ic rightVector = direction.toSide().yawClockwise(3).direction();
 

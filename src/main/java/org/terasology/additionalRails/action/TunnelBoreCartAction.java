@@ -35,7 +35,6 @@ import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.health.event.DoDamageEvent;
 import org.terasology.logic.inventory.InventoryComponent;
 import org.terasology.logic.inventory.events.BeforeItemPutInInventory;
-import org.terasology.math.JomlUtil;
 import org.terasology.math.Side;
 import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.registry.CoreRegistry;
@@ -66,7 +65,7 @@ public class TunnelBoreCartAction extends BaseComponentSystem {
         BlockManager blockManager = CoreRegistry.get(BlockManager.class);
         Block air = blockManager.getBlock(BlockManager.AIR_ID);
 
-        Vector3i cartLoc = JomlUtil.from(cart.getComponent(PathFollowerComponent.class).segmentMeta.association.getComponent(BlockComponent.class).position);
+        Vector3i cartLoc = cart.getComponent(PathFollowerComponent.class).segmentMeta.association.getComponent(BlockComponent.class).getPosition(new Vector3i());
         Vector3i direction = new Vector3i(event.newRailLocation).sub(cartLoc);
         Side facing = Side.inDirection(direction.x(), 0, direction.z());
         Vector3ic perp = facing.yawClockwise(1).direction();

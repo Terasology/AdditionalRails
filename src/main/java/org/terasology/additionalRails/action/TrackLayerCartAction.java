@@ -27,7 +27,6 @@ import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
 import org.terasology.logic.inventory.InventoryComponent;
 import org.terasology.logic.inventory.ItemComponent;
-import org.terasology.math.JomlUtil;
 import org.terasology.math.Side;
 import org.terasology.minecarts.blocks.RailBlockFamily;
 import org.terasology.minecarts.blocks.RailComponent;
@@ -67,7 +66,7 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
             }
 
             BlockComponent bComp = rbEntity.getComponent(BlockComponent.class);
-            Vector3i rbLocation = new Vector3i(JomlUtil.from(bComp.position));
+            Vector3i rbLocation = new Vector3i(bComp.getPosition(new Vector3i()));
             Block rBlock = bComp.block;
 
             Vector3i heading = new Vector3i(pfComp.heading, org.joml.RoundingMode.CEILING);
