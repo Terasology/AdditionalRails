@@ -67,7 +67,7 @@ public class TrackLayerCartAction extends BaseComponentSystem implements UpdateS
 
             BlockComponent bComp = rbEntity.getComponent(BlockComponent.class);
             Vector3i rbLocation = new Vector3i(bComp.getPosition(new Vector3i()));
-            Block rBlock = bComp.block;
+            Block rBlock = bComp.getBlock();
 
             Vector3i heading = new Vector3i(pfComp.heading, org.joml.RoundingMode.CEILING);
 

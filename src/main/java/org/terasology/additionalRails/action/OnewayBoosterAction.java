@@ -57,7 +57,7 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
         entities.removeIf(e -> !e.cart.exists() || !e.cart.hasComponent(RailVehicleComponent.class) || !e.cart.hasComponent(PathFollowerComponent.class)
                 || !e.rail.exists() || !e.rail.hasComponent(OnewayBoosterRailComponent.class));
         for (RailCart rc : entities) {
-            Block block = rc.rail.getComponent(BlockComponent.class).block;
+            Block block = rc.rail.getComponent(BlockComponent.class).getBlock();
             RailBlockFamily family = (RailBlockFamily) block.getBlockFamily();
             //Get the direction of the rail
             Rotation rotation = family.getRotationFor(block.getURI());
