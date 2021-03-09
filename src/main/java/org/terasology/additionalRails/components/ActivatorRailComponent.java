@@ -1,6 +1,6 @@
 package org.terasology.additionalRails.components;
 
-import org.terasology.entitySystem.Component;
+import org.terasology.engine.entitySystem.Component;
 
 /**
  * Component, which differentiates the Activator Rail from others.

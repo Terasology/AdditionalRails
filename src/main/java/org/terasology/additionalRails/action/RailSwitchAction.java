@@ -18,23 +18,23 @@ package org.terasology.additionalRails.action;
 import org.joml.Vector3i;
 import org.terasology.additionalRails.components.RailSwitchLeverComponent;
 import org.terasology.additionalRails.components.RailSwitchSignalComponent;
-import org.terasology.entitySystem.entity.EntityRef;
-import org.terasology.entitySystem.entity.lifecycleEvents.OnChangedComponent;
-import org.terasology.entitySystem.event.ReceiveEvent;
-import org.terasology.entitySystem.systems.BaseComponentSystem;
-import org.terasology.entitySystem.systems.RegisterMode;
-import org.terasology.entitySystem.systems.RegisterSystem;
-import org.terasology.logic.common.ActivateEvent;
-import org.terasology.math.SideBitFlag;
+import org.terasology.engine.entitySystem.entity.EntityRef;
+import org.terasology.engine.entitySystem.entity.lifecycleEvents.OnChangedComponent;
+import org.terasology.engine.entitySystem.event.ReceiveEvent;
+import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
+import org.terasology.engine.entitySystem.systems.RegisterMode;
+import org.terasology.engine.entitySystem.systems.RegisterSystem;
+import org.terasology.engine.logic.common.ActivateEvent;
+import org.terasology.engine.math.SideBitFlag;
+import org.terasology.engine.registry.In;
+import org.terasology.engine.world.BlockEntityRegistry;
+import org.terasology.engine.world.WorldProvider;
+import org.terasology.engine.world.block.Block;
+import org.terasology.engine.world.block.BlockComponent;
+import org.terasology.engine.world.block.BlockManager;
 import org.terasology.minecarts.blocks.RailBlockFamily;
 import org.terasology.minecarts.blocks.RailComponent;
-import org.terasology.registry.In;
 import org.terasology.signalling.components.SignalConsumerStatusComponent;
-import org.terasology.world.BlockEntityRegistry;
-import org.terasology.world.WorldProvider;
-import org.terasology.world.block.Block;
-import org.terasology.world.block.BlockComponent;
-import org.terasology.world.block.BlockManager;
 
 /**
  * Class describing railSwitch's behavior.
@@ -60,7 +60,7 @@ public class RailSwitchAction extends BaseComponentSystem {
 
     /**
      * Prepares blocks for future use (see code below)
-     * These block are obtained from an instance of {@link org.terasology.world.block.BlockManager}
+     * These block are obtained from an instance of {@link org.terasology.engine.world.block.BlockManager}
      */
     @Override
     public void initialise() {

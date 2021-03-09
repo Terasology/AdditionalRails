@@ -4,8 +4,8 @@
 package org.terasology.additionalRails.ui;
 
 import org.terasology.additionalRails.components.ExplosiveCartComponent;
-import org.terasology.entitySystem.entity.EntityRef;
-import org.terasology.rendering.nui.CoreScreenLayer;
+import org.terasology.engine.entitySystem.entity.EntityRef;
+import org.terasology.engine.rendering.nui.CoreScreenLayer;
 import org.terasology.nui.widgets.UIButton;
 import org.terasology.nui.widgets.UISlider;
 

@@ -1,6 +1,6 @@
 package org.terasology.additionalRails.events;
 
-import org.terasology.entitySystem.event.Event;
+import org.terasology.engine.entitySystem.event.Event;
 
 /**
  * An event called, when cart enters the Activator Rail.

@@ -15,7 +15,7 @@
  */
 package org.terasology.additionalRails.components;
 
-import org.terasology.entitySystem.Component;
+import org.terasology.engine.entitySystem.Component;
 
 public class LocomotiveComponent implements Component {
     public boolean active = false;

@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.terasology.additionalRails.components.ExampleActivableCartComponent;
 import org.terasology.additionalRails.events.CartActivatedEvent;
 import org.terasology.additionalRails.events.CartDeactivatedEvent;
-import org.terasology.entitySystem.entity.EntityRef;
-import org.terasology.entitySystem.event.ReceiveEvent;
-import org.terasology.entitySystem.systems.BaseComponentSystem;
-import org.terasology.entitySystem.systems.RegisterMode;
-import org.terasology.entitySystem.systems.RegisterSystem;
+import org.terasology.engine.entitySystem.entity.EntityRef;
+import org.terasology.engine.entitySystem.event.ReceiveEvent;
+import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
+import org.terasology.engine.entitySystem.systems.RegisterMode;
+import org.terasology.engine.entitySystem.systems.RegisterSystem;
 
 /**
  * Example system utilising {@link org.terasology.additionalRails.events.CartActivatedEvent}.

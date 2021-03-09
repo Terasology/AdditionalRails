@@ -3,13 +3,13 @@
 
 package org.terasology.additionalRails.ui;
 
-import org.terasology.entitySystem.entity.EntityRef;
-import org.terasology.logic.characters.CharacterComponent;
-import org.terasology.logic.players.LocalPlayer;
-import org.terasology.registry.In;
-import org.terasology.rendering.nui.CoreScreenLayer;
+import org.terasology.engine.entitySystem.entity.EntityRef;
+import org.terasology.engine.logic.characters.CharacterComponent;
+import org.terasology.engine.logic.players.LocalPlayer;
+import org.terasology.engine.registry.In;
+import org.terasology.engine.rendering.nui.CoreScreenLayer;
+import org.terasology.engine.rendering.nui.layers.ingame.inventory.InventoryGrid;
 import org.terasology.nui.databinding.ReadOnlyBinding;
-import org.terasology.rendering.nui.layers.ingame.inventory.InventoryGrid;
 
 public class CargoCartScreen extends CoreScreenLayer {
 
