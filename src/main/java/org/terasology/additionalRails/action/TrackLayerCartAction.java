@@ -25,7 +25,7 @@ import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
 import org.terasology.engine.entitySystem.systems.RegisterMode;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
 import org.terasology.engine.entitySystem.systems.UpdateSubscriberSystem;
-import org.terasology.logic.inventory.InventoryComponent;
+import org.terasology.module.inventory.components.InventoryComponent;
 import org.terasology.engine.logic.inventory.ItemComponent;
 import org.terasology.engine.math.Side;
 import org.terasology.engine.registry.In;
