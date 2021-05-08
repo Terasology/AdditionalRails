@@ -22,9 +22,11 @@
     "Health": {
         "currentHealth": 1,
         "maxHealth": 1,
-        "regenRate": 1,
-        "waitBeforeRegen": 2,
         "destroyEntityOnNoHealth" : true
+    },
+    "BaseRegen": {
+        "regenRate": 1,
+        "waitBeforeRegen": 2
     },
     "AdditionalRails:PlantCart" : {},
     "Rails:RailVehicle": {},
