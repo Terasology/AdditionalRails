@@ -1,7 +1,10 @@
 
+// Copyright 2021 The Terasology Foundation
+// SPDX-License-Identifier: Apache-2.0
+
 package org.terasology.additionalRails.components;
 
-import org.terasology.engine.entitySystem.Component;
+import org.terasology.gestalt.entitysystem.component.EmptyComponent;
 
-public class TunnelBoreCartComponent implements Component {
+public class TunnelBoreCartComponent extends EmptyComponent<TunnelBoreCartComponent> {
 }
