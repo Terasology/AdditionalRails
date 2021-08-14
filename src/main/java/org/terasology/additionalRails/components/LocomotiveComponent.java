@@ -8,7 +8,7 @@ public class LocomotiveComponent implements Component<LocomotiveComponent> {
     public boolean active = false;
 
     @Override
-    public void copy(LocomotiveComponent other) {
+    public void copyFrom(LocomotiveComponent other) {
         this.active = other.active;
     }
 }

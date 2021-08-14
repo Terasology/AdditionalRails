@@ -16,7 +16,7 @@ public class ExplosiveCartComponent implements Component<ExplosiveCartComponent>
     public long fuseLengthMs = 4000;
 
     @Override
-    public void copy(ExplosiveCartComponent other) {
+    public void copyFrom(ExplosiveCartComponent other) {
         this.fuseLengthMs = other.fuseLengthMs;
     }
 }

@@ -12,7 +12,7 @@ public class HooverCartComponent implements Component<HooverCartComponent> {
     public int energy = 0;
 
     @Override
-    public void copy(HooverCartComponent other) {
+    public void copyFrom(HooverCartComponent other) {
         this.energy = other.energy;
     }
 }

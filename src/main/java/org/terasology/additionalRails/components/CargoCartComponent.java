@@ -10,7 +10,7 @@ public class CargoCartComponent implements Component<CargoCartComponent> {
 	public int weight = 0;
 
 	@Override
-	public void copy(CargoCartComponent other) {
+	public void copyFrom(CargoCartComponent other) {
 		this.weight = other.weight;
 	}
 }

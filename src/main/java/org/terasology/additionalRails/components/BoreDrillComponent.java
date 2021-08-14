@@ -10,7 +10,7 @@ public class BoreDrillComponent implements Component<BoreDrillComponent> {
     public Prefab damageType;
 
     @Override
-    public void copy(BoreDrillComponent other) {
+    public void copyFrom(BoreDrillComponent other) {
         this.damageType = other.damageType;
     }
 }

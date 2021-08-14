@@ -14,7 +14,7 @@ public class RailSwitchLeverComponent implements Component<RailSwitchLeverCompon
     public boolean isOn;
 
     @Override
-    public void copy(RailSwitchLeverComponent other) {
+    public void copyFrom(RailSwitchLeverComponent other) {
         this.isOn = other.isOn;
     }
 }
