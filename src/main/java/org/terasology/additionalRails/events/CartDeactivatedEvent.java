@@ -1,6 +1,6 @@
 package org.terasology.additionalRails.events;
 
-import org.terasology.engine.entitySystem.event.Event;
+import org.terasology.gestalt.entitysystem.event.Event;
 
 /**
  * An event called, when cart leaves the Activator Rail.
