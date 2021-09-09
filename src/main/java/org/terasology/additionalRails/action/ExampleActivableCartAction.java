@@ -6,10 +6,10 @@ import org.terasology.additionalRails.components.ExampleActivableCartComponent;
 import org.terasology.additionalRails.events.CartActivatedEvent;
 import org.terasology.additionalRails.events.CartDeactivatedEvent;
 import org.terasology.engine.entitySystem.entity.EntityRef;
-import org.terasology.engine.entitySystem.event.ReceiveEvent;
 import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
 import org.terasology.engine.entitySystem.systems.RegisterMode;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
+import org.terasology.gestalt.entitysystem.event.ReceiveEvent;
 
 /**
  * Example system utilising {@link org.terasology.additionalRails.events.CartActivatedEvent}.

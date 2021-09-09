@@ -4,7 +4,6 @@ import org.terasology.additionalRails.components.ExplosiveCartComponent;
 import org.terasology.additionalRails.events.CartActivatedEvent;
 import org.terasology.additionalRails.ui.ExplosiveCartScreen;
 import org.terasology.engine.entitySystem.entity.EntityRef;
-import org.terasology.engine.entitySystem.event.ReceiveEvent;
 import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
 import org.terasology.engine.entitySystem.systems.RegisterMode;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
@@ -15,6 +14,7 @@ import org.terasology.engine.logic.location.LocationComponent;
 import org.terasology.engine.registry.In;
 import org.terasology.engine.rendering.nui.NUIManager;
 import org.terasology.explosives.logic.ExplosionActionComponent;
+import org.terasology.gestalt.entitysystem.event.ReceiveEvent;
 
 /**
  * System covering Explosive Cart's behavior.
