@@ -25,7 +25,6 @@ import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
 import org.terasology.engine.entitySystem.systems.RegisterMode;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
 import org.terasology.engine.entitySystem.systems.UpdateSubscriberSystem;
-import org.terasology.module.inventory.components.InventoryComponent;
 import org.terasology.engine.logic.inventory.ItemComponent;
 import org.terasology.engine.math.Side;
 import org.terasology.engine.registry.In;
@@ -39,6 +38,7 @@ import org.terasology.engine.world.block.items.BlockItemComponent;
 import org.terasology.minecarts.blocks.RailBlockFamily;
 import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.minecarts.components.RailVehicleComponent;
+import org.terasology.module.inventory.components.InventoryComponent;
 import org.terasology.segmentedpaths.components.PathFollowerComponent;
 
 import java.util.List;

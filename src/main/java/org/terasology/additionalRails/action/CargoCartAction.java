@@ -9,11 +9,11 @@ import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
 import org.terasology.engine.entitySystem.systems.RegisterMode;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
 import org.terasology.engine.entitySystem.systems.UpdateSubscriberSystem;
-import org.terasology.module.inventory.components.InventoryComponent;
 import org.terasology.engine.logic.inventory.ItemComponent;
-import org.terasology.module.inventory.events.BeforeItemPutInInventory;
 import org.terasology.engine.registry.In;
 import org.terasology.minecarts.components.RailVehicleComponent;
+import org.terasology.module.inventory.components.InventoryComponent;
+import org.terasology.module.inventory.events.BeforeItemPutInInventory;
 
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class CargoCartAction extends BaseComponentSystem implements UpdateSubscriberSystem {

@@ -24,14 +24,12 @@ import org.terasology.additionalRails.events.LayTrackEvent;
 import org.terasology.engine.entitySystem.entity.EntityManager;
 import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.event.EventPriority;
+import org.terasology.engine.entitySystem.event.Priority;
 import org.terasology.engine.entitySystem.event.ReceiveEvent;
 import org.terasology.engine.entitySystem.prefab.Prefab;
 import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
 import org.terasology.engine.entitySystem.systems.RegisterMode;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
-import org.terasology.module.health.events.DoDamageEvent;
-import org.terasology.module.inventory.components.InventoryComponent;
-import org.terasology.module.inventory.events.BeforeItemPutInInventory;
 import org.terasology.engine.math.Side;
 import org.terasology.engine.registry.CoreRegistry;
 import org.terasology.engine.registry.In;
@@ -43,6 +41,9 @@ import org.terasology.engine.world.block.Block;
 import org.terasology.engine.world.block.BlockComponent;
 import org.terasology.engine.world.block.BlockManager;
 import org.terasology.minecarts.blocks.RailComponent;
+import org.terasology.module.health.events.DoDamageEvent;
+import org.terasology.module.inventory.components.InventoryComponent;
+import org.terasology.module.inventory.events.BeforeItemPutInInventory;
 import org.terasology.segmentedpaths.components.PathFollowerComponent;
 
 import java.util.ArrayList;
@@ -58,7 +59,8 @@ public class TunnelBoreCartAction extends BaseComponentSystem {
     @In
     private BlockEntityRegistry blockEntityRegistry;
 
-    @ReceiveEvent(priority = EventPriority.PRIORITY_HIGH)
+    @Priority(EventPriority.PRIORITY_HIGH)
+    @ReceiveEvent
     public void onLayTrack(LayTrackEvent event, EntityRef cart, TrackLayerCartComponent comp, TunnelBoreCartComponent boreComp) {
         Random rand = new FastRandom();
 
