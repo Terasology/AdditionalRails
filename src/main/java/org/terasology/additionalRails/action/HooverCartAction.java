@@ -49,7 +49,8 @@ public class HooverCartAction extends BaseComponentSystem implements UpdateSubsc
 
     @Override
     public void update(float delta) {
-        for (EntityRef entity : entityManager.getEntitiesWith(HooverCartComponent.class, InventoryComponent.class, LocationComponent.class)) {
+        for (EntityRef entity : entityManager.getEntitiesWith(HooverCartComponent.class, InventoryComponent.class,
+                LocationComponent.class)) {
             HooverCartComponent hcComponent = entity.getComponent(HooverCartComponent.class);
 
             //we need to take a look at the first slot to check if there is any fuel for the cart
@@ -81,7 +82,7 @@ public class HooverCartAction extends BaseComponentSystem implements UpdateSubsc
             //create an AABB in which we will look for all entities
             LocationComponent lComponent = entity.getComponent(LocationComponent.class);
             Vector3f pos = lComponent.getWorldPosition(new Vector3f());
-            AABBf scannedArea = new AABBf(pos,pos).expand(new Vector3f(1.5f, 0.5f, 1.5f));
+            AABBf scannedArea = new AABBf(pos, pos).expand(new Vector3f(1.5f, 0.5f, 1.5f));
 
             //remove non-pickable entities from the list
             List<EntityRef> foundEntities = physics.scanArea(scannedArea, StandardCollisionGroup.ALL);

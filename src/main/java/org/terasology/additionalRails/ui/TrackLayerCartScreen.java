@@ -1,4 +1,4 @@
-// Copyright 2020 The Terasology Foundation
+// Copyright 2021 The Terasology Foundation
 // SPDX-License-Identifier: Apache-2.0
 
 package org.terasology.additionalRails.ui;
@@ -13,7 +13,6 @@ import org.terasology.nui.databinding.ReadOnlyBinding;
 
 /**
  * Screen opened up upon activation of the Track Layer Cart - used to put rails into it.
- * @author not anuar2k (ha! got ya!), but the ContainerScreen.java's creator. It's nearly a 1:1 copy.
  */
 public class TrackLayerCartScreen extends CoreScreenLayer {
 

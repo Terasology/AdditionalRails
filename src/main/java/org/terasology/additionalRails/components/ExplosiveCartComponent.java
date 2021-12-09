@@ -7,7 +7,6 @@ import org.terasology.gestalt.entitysystem.component.Component;
 
 /**
  * Component differentiating Explosive Cart.
- * @author Aleksander Wójtowicz <anuar2k@outlook.com>
  */
 public class ExplosiveCartComponent implements Component<ExplosiveCartComponent> {
     /**

@@ -1,19 +1,22 @@
+// Copyright 2021 The Terasology Foundation
+// SPDX-License-Identifier: Apache-2.0
+
 package org.terasology.additionalRails.action;
 
 import org.joml.Vector3f;
 import org.terasology.additionalRails.components.CargoCartComponent;
 import org.terasology.engine.entitySystem.entity.EntityManager;
 import org.terasology.engine.entitySystem.entity.EntityRef;
-import org.terasology.engine.entitySystem.event.ReceiveEvent;
 import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
 import org.terasology.engine.entitySystem.systems.RegisterMode;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
 import org.terasology.engine.entitySystem.systems.UpdateSubscriberSystem;
-import org.terasology.module.inventory.components.InventoryComponent;
 import org.terasology.engine.logic.inventory.ItemComponent;
-import org.terasology.module.inventory.events.BeforeItemPutInInventory;
 import org.terasology.engine.registry.In;
+import org.terasology.gestalt.entitysystem.event.ReceiveEvent;
 import org.terasology.minecarts.components.RailVehicleComponent;
+import org.terasology.module.inventory.components.InventoryComponent;
+import org.terasology.module.inventory.events.BeforeItemPutInInventory;
 
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class CargoCartAction extends BaseComponentSystem implements UpdateSubscriberSystem {

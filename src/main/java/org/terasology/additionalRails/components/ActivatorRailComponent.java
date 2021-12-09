@@ -7,7 +7,6 @@ import org.terasology.gestalt.entitysystem.component.EmptyComponent;
 
 /**
  * Component, which differentiates the Activator Rail from others.
- * @author Aleksander Wójtowicz <anuar2k@outlook.com>
  */
 public class ActivatorRailComponent extends EmptyComponent<ActivatorRailComponent> {
 }

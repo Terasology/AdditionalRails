@@ -6,7 +6,6 @@ import com.google.common.collect.Sets;
 import org.joml.Vector3f;
 import org.terasology.additionalRails.components.OnewayBoosterRailComponent;
 import org.terasology.engine.entitySystem.entity.EntityRef;
-import org.terasology.engine.entitySystem.event.ReceiveEvent;
 import org.terasology.engine.entitySystem.prefab.Prefab;
 import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
 import org.terasology.engine.entitySystem.systems.RegisterMode;
@@ -18,6 +17,7 @@ import org.terasology.engine.registry.In;
 import org.terasology.engine.world.block.Block;
 import org.terasology.engine.world.block.BlockComponent;
 import org.terasology.engine.world.block.BlockManager;
+import org.terasology.gestalt.entitysystem.event.ReceiveEvent;
 import org.terasology.minecarts.blocks.RailBlockFamily;
 import org.terasology.minecarts.blocks.RailComponent;
 import org.terasology.minecarts.components.RailVehicleComponent;
@@ -34,7 +34,7 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
     private static final int PUSH_RATE = 20;
     private static final int VELOCITY_LENGTH_MAX = 25;
 
-    private Set<RailCart> entities = Sets.newHashSet(); //The set of all pairs of a tile of OnewayBoosterRail and a
+    private final Set<RailCart> entities = Sets.newHashSet(); //The set of all pairs of a tile of OnewayBoosterRail and a
     // vehicle on it
 
     @In
@@ -54,8 +54,11 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
 
     @Override
     public void update(float delta) {
-        entities.removeIf(e -> !e.cart.exists() || !e.cart.hasComponent(RailVehicleComponent.class) || !e.cart.hasComponent(PathFollowerComponent.class)
-                || !e.rail.exists() || !e.rail.hasComponent(OnewayBoosterRailComponent.class));
+        entities.removeIf(e -> !e.cart.exists()
+                || !e.cart.hasComponent(RailVehicleComponent.class)
+                || !e.cart.hasComponent(PathFollowerComponent.class)
+                || !e.rail.exists()
+                || !e.rail.hasComponent(OnewayBoosterRailComponent.class));
         for (RailCart rc : entities) {
             Block block = rc.rail.getComponent(BlockComponent.class).getBlock();
             RailBlockFamily family = (RailBlockFamily) block.getBlockFamily();
@@ -85,8 +88,8 @@ public class OnewayBoosterAction extends BaseComponentSystem implements UpdateSu
     }
 
     /**
-     * Adds {@code thisMuch} to the velocity of {@code ref}'s {@code RailVehicleComponent} if it doesn't exceed {@link
-     * #VELOCITY_LENGTH_MAX} or the addition decreases it.
+     * Adds {@code thisMuch} to the velocity of {@code ref}'s {@code RailVehicleComponent} if it doesn't exceed {@link #VELOCITY_LENGTH_MAX}
+     * or the addition decreases it.
      */
     private void push(EntityRef ref, Vector3f thisMuch) {
         RailVehicleComponent railVehicleComponent = ref.getComponent(RailVehicleComponent.class);

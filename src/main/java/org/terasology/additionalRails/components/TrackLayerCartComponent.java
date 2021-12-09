@@ -7,7 +7,6 @@ import org.terasology.gestalt.entitysystem.component.EmptyComponent;
 
 /**
  * Component differentiating Track Layer Cart from others.
- * @author anuar2k
  */
 public class TrackLayerCartComponent extends EmptyComponent<TrackLayerCartComponent> {
 }
