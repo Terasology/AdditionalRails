@@ -1,18 +1,5 @@
-/*
- * Copyright 2018 MovingBlocks
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2021 The Terasology Foundation
+// SPDX-License-Identifier: Apache-2.0
 package org.terasology.additionalRails.action;
 
 import org.joml.Vector3i;
@@ -38,7 +25,7 @@ import org.terasology.signalling.components.SignalConsumerStatusComponent;
 
 /**
  * Class describing railSwitch's behavior.
- *
+ * <p>
  * Code below is inspired by Marcin Sciesinki's Signalling module and michaelpollind's Rails module
  */
 @RegisterSystem(RegisterMode.AUTHORITY)
@@ -59,8 +46,8 @@ public class RailSwitchAction extends BaseComponentSystem {
     private RailBlockFamily invertFamily;
 
     /**
-     * Prepares blocks for future use (see code below)
-     * These block are obtained from an instance of {@link org.terasology.engine.world.block.BlockManager}
+     * Prepares blocks for future use (see code below) These block are obtained from an instance of {@link
+     * org.terasology.engine.world.block.BlockManager}
      */
     @Override
     public void initialise() {
@@ -75,11 +62,12 @@ public class RailSwitchAction extends BaseComponentSystem {
     /**
      * Updates railSwitchLever and rails around it, when user interacts the block.
      *
-     * @param event  ActivateEvent, just used to differentiate from other events
+     * @param event ActivateEvent, just used to differentiate from other events
      * @param entity The entity related to railSwitchLever
      */
     @ReceiveEvent(components = {BlockComponent.class, RailSwitchLeverComponent.class})
-    public void railSwitchLeverAction(ActivateEvent event, EntityRef entity, BlockComponent blockComponent, RailSwitchLeverComponent rslComponent) {
+    public void railSwitchLeverAction(ActivateEvent event, EntityRef entity, BlockComponent blockComponent,
+                                      RailSwitchLeverComponent rslComponent) {
         Vector3i blockLocation = blockComponent.getPosition(new Vector3i());
 
         //switch the block from on to off, from off to on; rslComponent.isOn is set in block prefab
@@ -96,11 +84,13 @@ public class RailSwitchAction extends BaseComponentSystem {
     /**
      * Updates railSwitchSignal and rails around it, when {@link org.terasology.signalling} signal changes its state
      *
-     * @param event  OnChangedComponent event raised by signal modyfying {@link org.terasology.signalling.components.SignalConsumerStatusComponent}
+     * @param event OnChangedComponent event raised by signal modyfying
+     * {@link org.terasology.signalling.components.SignalConsumerStatusComponent}
      * @param entity The entity related to railSwitchSignal
      */
     @ReceiveEvent(components = {BlockComponent.class, RailSwitchSignalComponent.class, SignalConsumerStatusComponent.class})
-    public void railSwitchSignalAction(OnChangedComponent event, EntityRef entity, BlockComponent blockComponent, SignalConsumerStatusComponent scsComponent) {
+    public void railSwitchSignalAction(OnChangedComponent event, EntityRef entity, BlockComponent blockComponent,
+                                       SignalConsumerStatusComponent scsComponent) {
         Vector3i blockLocation = blockComponent.getPosition(new Vector3i());
         Block block = worldProvider.getBlock(blockLocation);
 
@@ -119,7 +109,7 @@ public class RailSwitchAction extends BaseComponentSystem {
      * Looks for rails around switchLocation and updates them basing on inverted bool
      *
      * @param switchLocation location of the switch
-     * @param inverted       boolean which is false if the rail juntion should be normal, or true, if the rail juntion should be inverted
+     * @param inverted boolean which is false if the rail juntion should be normal, or true, if the rail juntion should be inverted
      */
     private void updateRails(Vector3i switchLocation, boolean inverted) {
         //prepare the locations around the switch, where we're going to look for rails
@@ -143,7 +133,8 @@ public class RailSwitchAction extends BaseComponentSystem {
 
             if (SideBitFlag.getSides(connections).size() == 3) {
                 if (block.getBlockFamily() == railFamily || block.getBlockFamily() == invertFamily) {
-                    blockEntityRegistry.setBlockForceUpdateEntity(railLocation, inverted ? invertFamily.getBlockByConnection(connections) : railFamily.getBlockByConnection(connections));
+                    blockEntityRegistry.setBlockForceUpdateEntity(railLocation, inverted
+                           ? invertFamily.getBlockByConnection(connections) : railFamily.getBlockByConnection(connections));
                 }
             }
         }

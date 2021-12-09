@@ -1,4 +1,4 @@
-// Copyright 2020 The Terasology Foundation
+// Copyright 2021 The Terasology Foundation
 // SPDX-License-Identifier: Apache-2.0
 
 package org.terasology.additionalRails.ui;
@@ -11,7 +11,6 @@ import org.terasology.nui.widgets.UISlider;
 
 /**
  * Explosive Cart's fuse length configurator's backend.
- * @author Aleksander Wójtowicz <anuar2k@outlook.com>
  */
 public class ExplosiveCartScreen extends CoreScreenLayer {
     private EntityRef cartEntity;
@@ -34,7 +33,7 @@ public class ExplosiveCartScreen extends CoreScreenLayer {
                 if (cartEntity.hasComponent(ExplosiveCartComponent.class)) {
                     if (slider != null) {
                         ExplosiveCartComponent ecComponent = cartEntity.getComponent(ExplosiveCartComponent.class);
-                        ecComponent.fuseLengthMs = Math.round(slider.getValue()*1000);
+                        ecComponent.fuseLengthMs = Math.round(slider.getValue() * 1000);
                     }
                 }
                 triggerBackAnimation();
@@ -48,6 +47,7 @@ public class ExplosiveCartScreen extends CoreScreenLayer {
 
     /**
      * Called everytime in {@link org.terasology.additionalRails.action.ExplosiveCartAction} when the window gets opened.
+     *
      * @param cartEntity of the Explosive Cart.
      */
     public void attachToEntity(EntityRef cartEntity) {

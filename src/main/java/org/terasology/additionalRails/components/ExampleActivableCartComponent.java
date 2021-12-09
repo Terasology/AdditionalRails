@@ -7,7 +7,6 @@ import org.terasology.gestalt.entitysystem.component.EmptyComponent;
 
 /**
  * Example component differentiating our new cart type from other carts.
- * @author Aleksander Wójtowicz <anuar2k@outlook.com>
  */
 public class ExampleActivableCartComponent extends EmptyComponent<ExampleActivableCartComponent> {
 }

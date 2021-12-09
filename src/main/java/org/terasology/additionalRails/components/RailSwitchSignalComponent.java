@@ -9,6 +9,7 @@ import org.terasology.gestalt.entitysystem.component.EmptyComponent;
 @ForceBlockActive
 public class RailSwitchSignalComponent extends EmptyComponent<RailSwitchSignalComponent> {
     /**
-     * this component doesn't need to have an isOn boolean field, as information about state is stored in {@link org.terasology.signalling.components.SignalConsumerStatusComponent}
+     * this component doesn't need to have an isOn boolean field, as information about state is stored in
+     * {@link org.terasology.signalling.components.SignalConsumerStatusComponent}
      */
 }
